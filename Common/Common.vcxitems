@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{dccc53bd-9481-4fcc-83fb-c11f4fafc4d2}</ItemsProjectGuid>
+    <ItemsRootNamespace>Spock::Common</ItemsRootNamespace>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Logger\CoutLogger.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Logger\Logger.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Logger\LoggerChain.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Logger\VisualStudioLogger.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SpockException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)StringUtils.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Preconditions.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Logger\CoutLogger.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Logger\LoggerChain.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Logger\LoggerProvider.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Logger\VisualStudioLogger.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SpockException.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)StringUtils.cpp" />
+  </ItemGroup>
+</Project>
