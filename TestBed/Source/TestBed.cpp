@@ -30,7 +30,9 @@ int main()
     
     try {
         loader.LoadVulkanLibrary();
-        BadThings();
+        loader.LoadExportedFunctions();
+        loader.LoadGlobalFunctions();
+        loader.CheckAvailableExtensions();
     } catch (const Common::SpockException& e) {
         LOG_ERROR(e);
     }

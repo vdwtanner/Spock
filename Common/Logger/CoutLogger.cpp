@@ -2,7 +2,7 @@
 #include <iostream>
 
 void Spock::Common::CoutLogger::Info(std::string str) {
-	std::cout << str;
+	std::cout << str << std::endl;
 }
 
 void Spock::Common::CoutLogger::Info(std::wstring wstr) {
@@ -10,13 +10,13 @@ void Spock::Common::CoutLogger::Info(std::wstring wstr) {
 }
 
 void Spock::Common::CoutLogger::Warn(std::string str) {
-	std::cout << str;
+	std::cout << str << std::endl;
 }
 
 void Spock::Common::CoutLogger::Error(std::string str) {
-	std::cout << str;
+	std::cout << str << std::endl;
 }
 
 void Spock::Common::CoutLogger::Assert(std::string str) {
-	std::cout << str;
+	std::cout << str << std::endl;
 }

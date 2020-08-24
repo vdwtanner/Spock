@@ -36,9 +36,10 @@ namespace Spock::Common
 	}
 
 #if defined _DEBUG
-#define ASSERT_USAGE(expr, msg) if(!(expr)) Spock::Common::_assertUsage(#expr, msg)
-	inline void _assertUsage(const std::string expr, const std::string msg) {
-		fprintf(stderr, "Assertion '%s' failed: %s", expr.c_str(), msg.c_str());
+#define ASSERT_USAGE(expr, msg) if(!(expr)) Spock::Common::_assertUsage(#expr, msg, __FILE__, __LINE__)
+	inline void _assertUsage(const char* expr, const char* msg, const char* file, int line) {
+		const char* filename = Spock::Common::StringUtils::GetBaseFileName(file);
+		fprintf(stderr, "Assertion '%s' failed at %s:%d:: %s", expr, filename, line, msg);
 		abort();
 	}
 
@@ -56,9 +57,15 @@ namespace Spock::Common
 	inline void _log_info(const char* message) {
 		LoggerProvider::GetLogger()->Info(message);
 	}
+	inline void _log_info(const std::string message) {
+		LoggerProvider::GetLogger()->Info(message);
+	}
 
 #define LOG_WARN(msg) Spock::Common::_log_warn(msg)
 	inline void _log_warn(const char* message) {
+		LoggerProvider::GetLogger()->Warn(message);
+	}
+	inline void _log_warn(const std::string message) {
 		LoggerProvider::GetLogger()->Warn(message);
 	}
 

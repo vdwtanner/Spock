@@ -23,7 +23,7 @@ namespace Spock::Common
 		virtual std::string InternalGenerateErrorReport() const;
 	};
 
-#define THROW_EXCEPTION(type, ...) DERIVED_FROM(type, SpockException); \
+#define THROW_EXCEPTION(type, ...) DERIVED_FROM(type, SpockException);\
 	throw Spock::Common::_mk_exception<type>(Spock::Common::StringUtils::GetBaseFileName(__FILE__), ## __LINE__, ## __VA_ARGS__);
 
 	//This should not be called directly. Use THROW_EXCEPTION macro instead

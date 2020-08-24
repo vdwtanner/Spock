@@ -6,12 +6,12 @@
     </Filter>
     <Filter Include="Source">
       <UniqueIdentifier>{fd5e6a0c-700d-4a28-b4b4-3c8bfe5b8689}</UniqueIdentifier>
-	  <Extensions>cpp</Extensions>
+      <Extensions>cpp</Extensions>
     </Filter>
     <Filter Include="Header">
       <UniqueIdentifier>{d063352e-6188-4701-ac26-2c2953028177}</UniqueIdentifier>
-	  <Extensions>h</Extensions>
-	</Filter>
+      <Extensions>h</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Include\vk_platform.h">
@@ -23,10 +23,24 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Loader.h">
       <Filter>Header</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)VulkanFunctions.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Include\vulkan_core.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Loader.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)VulkanFunctions.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)ListOfVulkanFunctions.inl">
+      <Filter>Header</Filter>
+    </None>
   </ItemGroup>
 </Project>
