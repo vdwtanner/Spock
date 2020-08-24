@@ -14,33 +14,37 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Include\vk_platform.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Include\vulkan_core.h">
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Include\vulkan.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Include\vk_platform.h">
+      <Filter>Include</Filter>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Loader.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)VulkanFunctions.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanFunctions.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Include\vulkan_core.h">
-      <Filter>Include</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanInstance.h">
+      <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Loader.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)VulkanFunctions.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\VulkanFunctions.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\VulkanInstance.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)ListOfVulkanFunctions.inl">
-      <Filter>Header</Filter>
-    </None>
+    <None Include="$(MSBuildThisFileDirectory)ListOfVulkanFunctions.inl" />
   </ItemGroup>
 </Project>
