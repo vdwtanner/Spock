@@ -73,6 +73,9 @@ namespace Spock::Common
 	inline void _log_error(const char* message) {
 		LoggerProvider::GetLogger()->Error(message);
 	}
+	inline void _log_error(const std::string message) {
+		LoggerProvider::GetLogger()->Error(message);
+	}
 	inline void _log_error(const Spock::Common::SpockException exception) {
 		LoggerProvider::GetLogger()->Error(exception.GenerateErrorReport());
 	}

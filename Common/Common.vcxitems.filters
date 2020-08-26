@@ -52,5 +52,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Preconditions.h">
       <Filter>Header</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Version.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

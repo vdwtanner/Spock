@@ -22,6 +22,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)SpockException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)StringUtils.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Preconditions.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Version.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)Logger\CoutLogger.cpp" />

@@ -9,8 +9,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common", "Common\Common.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestBed", "TestBed\TestBed.vcxproj", "{56EDBC0E-1F05-48F4-A7E2-E5091F2A8D40}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTesting", "UnitTesting\UnitTesting.vcxproj", "{38B9B197-E61E-436F-8C6B-6DAC53EC31F0}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Common\Common.vcxitems*{38b9b197-e61e-436f-8c6b-6dac53ec31f0}*SharedItemsImports = 4
+		vkCore\vkCore.vcxitems*{38b9b197-e61e-436f-8c6b-6dac53ec31f0}*SharedItemsImports = 4
 		Common\Common.vcxitems*{56edbc0e-1f05-48f4-a7e2-e5091f2a8d40}*SharedItemsImports = 4
 		vkCore\vkCore.vcxitems*{56edbc0e-1f05-48f4-a7e2-e5091f2a8d40}*SharedItemsImports = 4
 		vkCore\vkCore.vcxitems*{a91cdc16-996d-4f19-89a7-9b593fbcf685}*SharedItemsImports = 9
@@ -31,6 +35,14 @@ Global
 		{56EDBC0E-1F05-48F4-A7E2-E5091F2A8D40}.Release|x64.Build.0 = Release|x64
 		{56EDBC0E-1F05-48F4-A7E2-E5091F2A8D40}.Release|x86.ActiveCfg = Release|Win32
 		{56EDBC0E-1F05-48F4-A7E2-E5091F2A8D40}.Release|x86.Build.0 = Release|Win32
+		{38B9B197-E61E-436F-8C6B-6DAC53EC31F0}.Debug|x64.ActiveCfg = Debug|x64
+		{38B9B197-E61E-436F-8C6B-6DAC53EC31F0}.Debug|x64.Build.0 = Debug|x64
+		{38B9B197-E61E-436F-8C6B-6DAC53EC31F0}.Debug|x86.ActiveCfg = Debug|Win32
+		{38B9B197-E61E-436F-8C6B-6DAC53EC31F0}.Debug|x86.Build.0 = Debug|Win32
+		{38B9B197-E61E-436F-8C6B-6DAC53EC31F0}.Release|x64.ActiveCfg = Release|x64
+		{38B9B197-E61E-436F-8C6B-6DAC53EC31F0}.Release|x64.Build.0 = Release|x64
+		{38B9B197-E61E-436F-8C6B-6DAC53EC31F0}.Release|x86.ActiveCfg = Release|Win32
+		{38B9B197-E61E-436F-8C6B-6DAC53EC31F0}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
