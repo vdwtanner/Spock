@@ -8,6 +8,8 @@
 #include "Logger/VisualStudioLogger.h"
 #include "Logger/CoutLogger.h"
 #include "vkCore/Loader.h"
+#include "vkCore/VulkanInstance.h"
+#include "vkCore/VulkanInstanceFactory.h"
 
 using namespace Spock;
 using namespace Common;
@@ -26,13 +28,20 @@ int main()
     logger->AddLogger(std::make_unique<VisualStudioLogger>());
     logger->AddLogger(std::make_unique<CoutLogger>());
     LoggerProvider::Initialize(std::move(logger));
-    vkCore::Loader loader = vkCore::Loader();
-    
+    auto loader = std::make_shared<vkCore::Loader>();
+
+    auto desiredExtensions = std::vector<const char*>();
+    desiredExtensions.push_back("VK_KHR_win32_surface");
+    auto instanceFactory = vkCore::VulkanInstanceFactory(loader);
+
     try {
-        loader.LoadVulkanLibrary();
-        loader.LoadExportedFunctions();
-        loader.LoadGlobalFunctions();
-        loader.CheckAvailableExtensions();
+        loader->LoadVulkanLibrary();
+        loader->LoadExportedFunctions();
+        loader->LoadGlobalFunctions();
+        loader->DiscoverAvailableExtensions();
+
+        auto instance = instanceFactory.CreateVulkanInstance("TestBed", Version(0, 0, 1), desiredExtensions);
+        
     } catch (const Common::SpockException& e) {
         LOG_ERROR(e);
     }

@@ -32,6 +32,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanInstance.h">
       <Filter>Header</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Consts.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanInstanceFactory.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Loader.cpp">
@@ -43,8 +49,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\VulkanInstance.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\VulkanInstanceFactory.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)ListOfVulkanFunctions.inl" />
+    <None Include="$(MSBuildThisFileDirectory)vkCore\ListOfVulkanFunctions.inl" />
   </ItemGroup>
 </Project>

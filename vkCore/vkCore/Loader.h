@@ -1,6 +1,18 @@
 #pragma once
+#if defined _WIN32
+#ifndef __wtypes_h__
+#include <wtypes.h>
+#endif
+
+#ifndef __WINDEF_
+#include <windef.h>
+#endif
+#endif
+
+#include "vkCore/VulkanInstance.h"
 
 #include "Include/vulkan_core.h"
+
 
 namespace Spock::vkCore
 {
@@ -19,15 +31,21 @@ namespace Spock::vkCore
 		void LoadVulkanLibrary();
 		void LoadExportedFunctions();
 		void LoadGlobalFunctions();
-		void CheckAvailableExtensions();
+		void DiscoverAvailableExtensions();
+		void LoadInstanceLevelFunctions(const VulkanInstance* instance);
+		bool AreAllExtensionsAvailable(const std::vector<const char*>& desiredExtensions) const;
 	private:
+		const int LIBRARY_LOADED = 1;
+		const int EXPORTED_FUNCTIONS_LOADED = 2;
+		const int GLOBAL_FUNCTIONS_LOADED = 4;
+		const int DISCOVERED_AVAILABLE_EXTENSIONS = 8;
+
 		vkLibrary vulkan_library;
 		int loadStateBitmask;
 		std::vector<VkExtensionProperties> availableExtensions;
 
-		const int LIBRARY_LOADED = 1;
-		const int EXPORTED_FUNCTIONS_LOADED = 2;
-		const int GLOBAL_FUNCTIONS_LOADED = 4;
-		const int CHECKED_AVAILABLE_EXTENSIONS = 8;
+		bool IsExtensionSupported(const char* extension) const;
+
+		
 	};
 }

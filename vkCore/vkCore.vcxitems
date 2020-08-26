@@ -17,17 +17,20 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Include\vk_platform.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Include\vulkan.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Consts.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Include\vulkan_core.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Loader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanFunctions.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanInstance.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanInstanceFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Loader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\VulkanFunctions.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\VulkanInstance.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\VulkanInstanceFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)ListOfVulkanFunctions.inl" />
+    <None Include="$(MSBuildThisFileDirectory)vkCore\ListOfVulkanFunctions.inl" />
   </ItemGroup>
 </Project>

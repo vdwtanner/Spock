@@ -1,4 +1,15 @@
 #pragma once
+
+#ifdef _WIN32
+#ifndef __wtypes_h__
+#include <wtypes.h>
+#endif
+
+#ifndef __WINDEF_
+#include <windef.h>
+#endif
+#endif
+
 #include <string>
 #include <memory>
 #include "SpockException.h"

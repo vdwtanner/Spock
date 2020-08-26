@@ -3,6 +3,7 @@
 #endif
 
 #include <vector>
+#include <string>
 
 #include "Loader.h"
 #include "Logger/Logger.h"
@@ -37,7 +38,7 @@ namespace Spock::vkCore
 		#define EXPORTED_VULKAN_FUNCTION(name)\
 		name = (PFN_##name)LoadFunction(vulkan_library, #name);\
 		if (name == nullptr) {\
-			THROW_EXCEPTION(SpockException, "Could not load Vulkan function named:  " #name);\
+			THROW_EXCEPTION(SpockException, "Could not load Vulkan function named: " #name);\
 		} else {\
 			LOG_INFO("\tLoaded: " #name);\
 		}
@@ -53,7 +54,7 @@ namespace Spock::vkCore
 		#define GLOBAL_LEVEL_VULKAN_FUNCTION(name)\
 		name = (PFN_##name)vkGetInstanceProcAddr(nullptr, #name);\
 		if (name == nullptr) {\
-			THROW_EXCEPTION(SpockException, "Could not load Vulkan function named:  " #name);\
+			THROW_EXCEPTION(SpockException, "Could not load global-level Vulkan function named: " #name);\
 		} else {\
 			LOG_INFO("\tLoaded: " #name);\
 		}
@@ -62,7 +63,7 @@ namespace Spock::vkCore
 		loadStateBitmask |= GLOBAL_FUNCTIONS_LOADED;
 	}
 
-	void Loader::CheckAvailableExtensions() {
+	void Loader::DiscoverAvailableExtensions() {
 		ASSERT_USAGE((loadStateBitmask & GLOBAL_FUNCTIONS_LOADED) > 0, "Must call LoadGlobalFunctions() before CheckAvailableExtensions().");
 		LOG_INFO("\nChecking Available Extensions...");
 		uint32_t numExtensions = 0;
@@ -79,6 +80,40 @@ namespace Spock::vkCore
 		for (auto& ep : availableExtensions) {
 			LOG_INFO("\t" + std::string(ep.extensionName) + "  v" + std::to_string(ep.specVersion));
 		}
-		loadStateBitmask |= CHECKED_AVAILABLE_EXTENSIONS;
+		loadStateBitmask |= DISCOVERED_AVAILABLE_EXTENSIONS;
+	}
+
+	void Loader::LoadInstanceLevelFunctions(const VulkanInstance* instance) {
+		ASSERT_USAGE((loadStateBitmask & GLOBAL_FUNCTIONS_LOADED) > 0, "Must call GLOBAL_FUNCTIONS_LOADED() before LoadInstanceLevelFunctions().");
+		LOG_INFO("\nLoading INSTANCE_LEVEL_VULKAN_FUNCTIONs...");
+		auto handle = instance->GetVkInstanceHandle();
+		#define INSTANCE_LEVEL_VULKAN_FUNCTION(name)\
+		name = (PFN_##name)vkGetInstanceProcAddr(handle, #name);\
+		if (name == nullptr) {\
+			THROW_EXCEPTION(SpockException, "Could not load instance-level Vulkan function named: " #name);\
+		} else {\
+			LOG_INFO("\tLoaded: " #name);\
+		}
+		
+		#include "ListOfVulkanFunctions.inl"
+	}
+
+	bool Loader::AreAllExtensionsAvailable(const std::vector<const char*>& desiredExtensions) const {
+		for (auto& extensionName : desiredExtensions) {
+			if (!IsExtensionSupported(extensionName)) {
+				LOG_ERROR("Vulkan Extension not supported: " + std::string(extensionName));
+				return false;
+			}
+		}
+		return true;
+	}
+
+	bool Loader::IsExtensionSupported(const char* extension) const {
+		for (auto& availableExtension : availableExtensions) {
+			if (strcmp(extension, availableExtension.extensionName) == 0) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
