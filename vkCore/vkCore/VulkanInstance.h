@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Include/vulkan.h"
+#include "vkCore/VulkanFunctions.h"
 
 namespace Spock::vkCore
 {

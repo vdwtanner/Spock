@@ -27,13 +27,25 @@ namespace Spock::vkCore
 	class Loader
 	{
 	public:
-		Loader();
-		void LoadVulkanLibrary();
-		void LoadExportedFunctions();
-		void LoadGlobalFunctions();
-		void DiscoverAvailableExtensions();
-		void LoadInstanceLevelFunctions(const VulkanInstance* instance);
-		bool AreAllExtensionsAvailable(const std::vector<const char*>& desiredExtensions) const;
+		virtual ~Loader() {};
+		virtual void LoadVulkanLibrary() = 0;
+		virtual void LoadExportedFunctions() = 0;
+		virtual void LoadGlobalFunctions() = 0;
+		virtual void DiscoverAvailableExtensions() = 0;
+		virtual void LoadInstanceLevelFunctions(const VulkanInstance* instance) = 0;
+		virtual bool AreAllExtensionsAvailable(const std::vector<const char*>& desiredExtensions) const = 0;
+	};
+
+	class LoaderImpl : public Loader
+	{
+	public:
+		LoaderImpl();
+		void LoadVulkanLibrary() override;
+		void LoadExportedFunctions() override;
+		void LoadGlobalFunctions() override;
+		void DiscoverAvailableExtensions() override;
+		void LoadInstanceLevelFunctions(const VulkanInstance* instance) override;
+		bool AreAllExtensionsAvailable(const std::vector<const char*>& desiredExtensions) const override;
 	private:
 		const int LIBRARY_LOADED = 1;
 		const int EXPORTED_FUNCTIONS_LOADED = 2;

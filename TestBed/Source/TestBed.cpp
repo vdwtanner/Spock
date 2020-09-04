@@ -28,11 +28,11 @@ int main()
     logger->AddLogger(std::make_unique<VisualStudioLogger>());
     logger->AddLogger(std::make_unique<CoutLogger>());
     LoggerProvider::Initialize(std::move(logger));
-    auto loader = std::make_shared<vkCore::Loader>();
+    auto loader = std::make_shared<vkCore::LoaderImpl>();
 
     auto desiredExtensions = std::vector<const char*>();
     desiredExtensions.push_back("VK_KHR_win32_surface");
-    auto instanceFactory = vkCore::VulkanInstanceFactory(loader);
+    auto instanceFactory = vkCore::VulkanInstanceFactoryImpl(loader);
 
     try {
         loader->LoadVulkanLibrary();

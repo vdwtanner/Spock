@@ -5,6 +5,9 @@
     <ClCompile Include="tst\CommonTests\VersionTest.cpp">
       <Filter>CommonTests</Filter>
     </ClCompile>
+    <ClCompile Include="tst\vkCoreTests\VulkanInstanceFactoryTest.cpp">
+      <Filter>vkCoreTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -19,5 +22,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tst\CommonTestHeaders.h" />
+    <ClInclude Include="tst\vkCoreTests\LoaderMock.h">
+      <Filter>vkCoreTests</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

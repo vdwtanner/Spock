@@ -14,8 +14,14 @@ namespace Spock::vkCore
 	class VulkanInstanceFactory
 	{
 	public:
-		VulkanInstanceFactory(std::shared_ptr<Loader> loader);
-		std::unique_ptr<VulkanInstance> CreateVulkanInstance(const std::string& appName, const Common::Version& appVersion, const std::vector<const char*>& desiredExtenisions);
+		virtual std::unique_ptr<VulkanInstance> CreateVulkanInstance(const std::string& appName, const Common::Version& appVersion, const std::vector<const char*>& desiredExtenisions) = 0;
+	};
+
+	class VulkanInstanceFactoryImpl : public VulkanInstanceFactory
+	{
+	public:
+		VulkanInstanceFactoryImpl(std::shared_ptr<Loader> loader);
+		std::unique_ptr<VulkanInstance> CreateVulkanInstance(const std::string& appName, const Common::Version& appVersion, const std::vector<const char*>& desiredExtenisions) override;
 	private:
 		std::shared_ptr<Loader> loader;
 		uint32_t ToVkVersion(const Common::Version& version);

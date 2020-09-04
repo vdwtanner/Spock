@@ -9,11 +9,11 @@
 namespace Spock::vkCore
 {
 	using namespace Common;
-	VulkanInstanceFactory::VulkanInstanceFactory(std::shared_ptr<Loader> loader) : loader(loader) {
+	VulkanInstanceFactoryImpl::VulkanInstanceFactoryImpl(std::shared_ptr<Loader> loader) : loader(loader) {
 	}
 
 
-	std::unique_ptr<VulkanInstance> VulkanInstanceFactory::CreateVulkanInstance(const std::string& appName, const Version& appVersion, const std::vector<const char*>& desiredExtenisions) {
+	std::unique_ptr<VulkanInstance> VulkanInstanceFactoryImpl::CreateVulkanInstance(const std::string& appName, const Version& appVersion, const std::vector<const char*>& desiredExtenisions) {
 		if (!loader->AreAllExtensionsAvailable(desiredExtenisions)) {
 			THROW_EXCEPTION(SpockException, "Not all requested extensions are available. Check the log for more details.");
 		}
@@ -26,7 +26,7 @@ namespace Spock::vkCore
 		return instance;
 	}
 
-	VkApplicationInfo VulkanInstanceFactory::MakeAppInfo(const std::string& appName, const Version& appVersion) {
+	VkApplicationInfo VulkanInstanceFactoryImpl::MakeAppInfo(const std::string& appName, const Version& appVersion) {
 		return {
 			VkStructureType::VK_STRUCTURE_TYPE_APPLICATION_INFO,
 			nullptr,				//pnext
@@ -38,11 +38,11 @@ namespace Spock::vkCore
 		};
 	}
 
-	uint32_t VulkanInstanceFactory::ToVkVersion(const Version& version) {
+	uint32_t VulkanInstanceFactoryImpl::ToVkVersion(const Version& version) {
 		return VK_MAKE_VERSION(version.major, version.minor, version.patch);
 	}
 
-	VkInstanceCreateInfo VulkanInstanceFactory::MakeVkInstanceCreateInfo(const VkApplicationInfo* appInfo, const std::vector<const char*>& layers, const std::vector<const char*>& extensions) {
+	VkInstanceCreateInfo VulkanInstanceFactoryImpl::MakeVkInstanceCreateInfo(const VkApplicationInfo* appInfo, const std::vector<const char*>& layers, const std::vector<const char*>& extensions) {
 		return {
 			VkStructureType::VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
 			nullptr,
@@ -55,7 +55,7 @@ namespace Spock::vkCore
 		};
 	}
 
-	VkInstance VulkanInstanceFactory::MakeVkInstance(const VkInstanceCreateInfo* createInfo) {
+	VkInstance VulkanInstanceFactoryImpl::MakeVkInstance(const VkInstanceCreateInfo* createInfo) {
 		VkInstance instance;
 
 		VkResult result = vkCreateInstance(createInfo, nullptr, &instance);
