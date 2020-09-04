@@ -15,21 +15,21 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Logger\CoutLogger.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Logger\Logger.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Logger\LoggerChain.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Logger\VisualStudioLogger.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)SpockException.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)StringUtils.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Preconditions.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Version.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Logger\CoutLogger.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Logger\Logger.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Logger\LoggerChain.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Logger\VisualStudioLogger.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\SpockException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\StringUtils.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Preconditions.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Version.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Logger\CoutLogger.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Logger\LoggerChain.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Logger\LoggerProvider.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Logger\VisualStudioLogger.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)SpockException.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)StringUtils.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Common\Logger\private\CoutLogger.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Common\Logger\private\LoggerChain.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Common\Logger\private\LoggerProvider.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Common\Logger\private\VisualStudioLogger.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Common\private\SpockException.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Common\private\StringUtils.cpp" />
   </ItemGroup>
 </Project>

@@ -3,10 +3,10 @@
 
 #include <iostream>
 #include <exception>
-#include "SpockException.h"
-#include "Logger/LoggerChain.h"
-#include "Logger/VisualStudioLogger.h"
-#include "Logger/CoutLogger.h"
+#include "Common/SpockException.h"
+#include "Common/Logger/LoggerChain.h"
+#include "Common/Logger/VisualStudioLogger.h"
+#include "Common/Logger/CoutLogger.h"
 #include "vkCore/Loader.h"
 #include "vkCore/VulkanInstance.h"
 #include "vkCore/VulkanInstanceFactory.h"

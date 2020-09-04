@@ -25,10 +25,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanInstanceFactory.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Loader.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\VulkanFunctions.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\VulkanInstance.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\VulkanInstanceFactory.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\Loader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanFunctions.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanInstance.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanInstanceFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)vkCore\ListOfVulkanFunctions.inl" />

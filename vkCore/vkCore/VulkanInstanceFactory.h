@@ -7,7 +7,7 @@
 
 #include "vkCore/VulkanInstance.h"
 #include "vkCore/Loader.h"
-#include "Version.h"
+#include "Common/Version.h"
 
 namespace Spock::vkCore
 {

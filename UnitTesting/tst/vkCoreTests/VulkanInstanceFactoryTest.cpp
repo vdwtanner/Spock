@@ -1,7 +1,7 @@
 #include "CommonTestHeaders.h"
 #include "vkCore/VulkanInstanceFactory.h"
 #include "vkCoreTests/LoaderMock.h"
-#include "SpockException.h"
+#include "Common/SpockException.h"
 #include "vkCore/VulkanFunctions.h"
 
 using namespace Spock::vkCore;

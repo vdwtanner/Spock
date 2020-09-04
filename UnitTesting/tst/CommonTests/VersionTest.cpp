@@ -1,5 +1,5 @@
 #include "CommonTestHeaders.h"
-#include "Version.h"
+#include "Common/Version.h"
 
 namespace Spock::Common::UnitTesting
 {

@@ -40,16 +40,16 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Loader.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\Loader.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\VulkanFunctions.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanFunctions.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\VulkanInstance.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanInstance.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\VulkanInstanceFactory.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanInstanceFactory.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
