@@ -13,16 +13,18 @@ namespace Spock::vkCore
 	}
 
 
-	std::unique_ptr<VulkanInstance> VulkanInstanceFactoryImpl::CreateVulkanInstance(const std::string& appName, const Version& appVersion, const std::vector<const char*>& desiredExtenisions) {
-		if (!loader->AreAllExtensionsAvailable(desiredExtenisions)) {
-			THROW_EXCEPTION(SpockException, "Not all requested extensions are available. Check the log for more details.");
+	std::unique_ptr<VulkanInstance> VulkanInstanceFactoryImpl::CreateVulkanInstance(const std::string& appName, const Version& appVersion) {
+
+		if (!loader->AreAllExtensionsAvailable(requiredExtensions)) {
+			THROW_EXCEPTION(SpockException, "Not all required extensions are available. Check the log for more details.");
 		}
 		VkApplicationInfo appInfo = MakeAppInfo(appName, appVersion);
 		auto layers = std::vector<const char*>();
-		VkInstanceCreateInfo createInfo = MakeVkInstanceCreateInfo(&appInfo, layers, desiredExtenisions);
+		VkInstanceCreateInfo createInfo = MakeVkInstanceCreateInfo(&appInfo, layers, requiredExtensions);
 		VkInstance vkInstance = MakeVkInstance(&createInfo);
 		auto instance = std::make_unique<VulkanInstance>(vkInstance);
 		loader->LoadInstanceLevelFunctions(instance.get());
+		loader->LoadInstanceLevelFunctionsFromExtensions(instance.get());
 		return instance;
 	}
 

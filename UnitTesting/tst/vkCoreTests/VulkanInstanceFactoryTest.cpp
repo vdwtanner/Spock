@@ -20,20 +20,16 @@ namespace UnitTesting::vkCore
 	TEST(VulkanInstanceFactoryImpl, DesiredExtensionsUnavailable) {
 		Setup();
 
-		std::vector<const char*> extensions;
-		extensions.push_back("extensionName");
 		EXPECT_CALL(*loader, AreAllExtensionsAvailable)
 			.Times(1)
 			.WillOnce(Return(false));
 
-		EXPECT_THROW(sut.CreateVulkanInstance("test", Version(0, 1, 0), extensions), SpockException);
+		EXPECT_THROW(sut.CreateVulkanInstance("test", Version(0, 1, 0)), SpockException);
 	}
 
 	TEST(VulkanInstanceFactoryImpl, VkCreateInstanceFails) {
 		Setup();
 
-		std::vector<const char*> extensions;
-		extensions.push_back("extensionName");
 		EXPECT_CALL(*loader, AreAllExtensionsAvailable)
 			.Times(1)
 			.WillOnce(Return(true));
@@ -43,7 +39,7 @@ namespace UnitTesting::vkCore
 		};
 		Spock::vkCore::vkCreateInstance = createInstance;
 
-		EXPECT_THROW(sut.CreateVulkanInstance("test", Version(0, 1, 0), extensions), SpockException);
+		EXPECT_THROW(sut.CreateVulkanInstance("test", Version(0, 1, 0)), SpockException);
 
 		Spock::vkCore::vkCreateInstance = nullptr;
 	}
@@ -51,12 +47,12 @@ namespace UnitTesting::vkCore
 	TEST(VulkanInstanceFactoryImpl, InstanceCreatedSuccessfully) {
 		Setup();
 
-		std::vector<const char*> extensions;
-		extensions.push_back("extensionName");
 		EXPECT_CALL(*loader, AreAllExtensionsAvailable)
 			.Times(1)
 			.WillOnce(Return(true));
 		EXPECT_CALL(*loader, LoadInstanceLevelFunctions)
+			.Times(1);
+		EXPECT_CALL(*loader, LoadInstanceLevelFunctionsFromExtensions)
 			.Times(1);
 		auto createInstance = [](const VkInstanceCreateInfo* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkInstance* pInstance) {
 			pInstance = new VkInstance();
@@ -66,7 +62,7 @@ namespace UnitTesting::vkCore
 		auto destroyInstance = [](VkInstance, const VkAllocationCallbacks*) {};
 		Spock::vkCore::vkDestroyInstance = destroyInstance;
 
-		auto result = sut.CreateVulkanInstance("test", Version(0, 1, 0), extensions);
+		auto result = sut.CreateVulkanInstance("test", Version(0, 1, 0));
 		
 		result.release();
 		Spock::vkCore::vkCreateInstance = nullptr;

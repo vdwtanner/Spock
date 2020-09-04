@@ -35,12 +35,12 @@ namespace Spock::vkCore
 	void LoaderImpl::LoadExportedFunctions() {
 		ASSERT_USAGE((loadStateBitmask & LIBRARY_LOADED) > 0, "Must call LoadVulkanLibrary() before LoadExportedFunctions().");
 		LOG_INFO("\nLoading EXPORTED_VULKAN_FUNCTIONs...");
-		#define EXPORTED_VULKAN_FUNCTION(name)\
-		name = (PFN_##name)LoadFunction(vulkan_library, #name);\
-		if (name == nullptr) {\
+		#define EXPORTED_VULKAN_FUNCTION(name)												\
+		name = (PFN_##name)LoadFunction(vulkan_library, #name);								\
+		if (name == nullptr) {																\
 			THROW_EXCEPTION(SpockException, "Could not load Vulkan function named: " #name);\
-		} else {\
-			LOG_INFO("\tLoaded: " #name);\
+		} else {																			\
+			LOG_INFO("\tLoaded: " #name);													\
 		}
 		
 		//Including this will cause the above macro to be called for all of the EXPORTED_VULKAN_FUNCTIONs in the .inl
@@ -51,12 +51,12 @@ namespace Spock::vkCore
 	void LoaderImpl::LoadGlobalFunctions() {
 		ASSERT_USAGE((loadStateBitmask & EXPORTED_FUNCTIONS_LOADED) > 0, "Must call LoadExportedFunctions() before LoadGlobalFunctions().");
 		LOG_INFO("\nLoading GLOBAL_VULKAN_FUNCTIONs...");
-		#define GLOBAL_LEVEL_VULKAN_FUNCTION(name)\
-		name = (PFN_##name)vkGetInstanceProcAddr(nullptr, #name);\
-		if (name == nullptr) {\
+		#define GLOBAL_LEVEL_VULKAN_FUNCTION(name)											\
+		name = (PFN_##name)vkGetInstanceProcAddr(nullptr, #name);							\
+		if (name == nullptr) {																\
 			THROW_EXCEPTION(SpockException, "Could not load global-level Vulkan function named: " #name);\
-		} else {\
-			LOG_INFO("\tLoaded: " #name);\
+		} else {																			\
+			LOG_INFO("\tLoaded: " #name);													\
 		}
 
 		#include "ListOfVulkanFunctions.inl"
@@ -85,16 +85,42 @@ namespace Spock::vkCore
 
 	void LoaderImpl::LoadInstanceLevelFunctions(const VulkanInstance* instance) {
 		ASSERT_USAGE((loadStateBitmask & GLOBAL_FUNCTIONS_LOADED) > 0, "Must call GLOBAL_FUNCTIONS_LOADED() before LoadInstanceLevelFunctions().");
-		LOG_INFO("\nLoading INSTANCE_LEVEL_VULKAN_FUNCTIONs...");
+		LOG_INFO("\nLoading INSTANCE_LEVEL_VULKAN_FUNCTIONS...");
 		auto handle = instance->GetVkInstanceHandle();
-		#define INSTANCE_LEVEL_VULKAN_FUNCTION(name)\
-		name = (PFN_##name)vkGetInstanceProcAddr(handle, #name);\
-		if (name == nullptr) {\
+		#define INSTANCE_LEVEL_VULKAN_FUNCTION(name)										\
+		name = (PFN_##name)vkGetInstanceProcAddr(handle, #name);							\
+		if (name == nullptr) {																\
 			THROW_EXCEPTION(SpockException, "Could not load instance-level Vulkan function named: " #name);\
-		} else {\
-			LOG_INFO("\tLoaded: " #name);\
+		} else {																			\
+			LOG_INFO("\tLoaded: " #name);													\
 		}
 		
+		#include "ListOfVulkanFunctions.inl"
+	}
+
+	void LoaderImpl::LoadInstanceLevelFunctionsFromExtensions(const VulkanInstance* instance) {
+		ASSERT_USAGE((loadStateBitmask & GLOBAL_FUNCTIONS_LOADED) > 0, "Must call GLOBAL_FUNCTIONS_LOADED() before LoadInstanceLevelFunctions().");
+		LOG_INFO("\nLoading INSTANCE_LEVEL_VULKAN_FUNCTIONS_FROM_EXTENSIONS...");
+		auto handle = instance->GetVkInstanceHandle();
+		bool extensionAvailable;
+		
+		#define INSTANCE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION(name, extension)				\
+		extensionAvailable = false;															\
+		for (auto& availableExtension : availableExtensions) {								\
+			if (std::string(availableExtension.extensionName) == std::string(extension)) {	\
+				extensionAvailable = true;													\
+				name = (PFN_##name)vkGetInstanceProcAddr(handle, #name);					\
+				if (name == nullptr) {														\
+					THROW_EXCEPTION(SpockException, "Could not load instance-level Vulkan function named '" #name "' from extension '" #extension);\
+				} else {																	\
+					LOG_INFO("\tLoaded: " #name);											\
+				}																			\
+			}																				\
+		}																					\
+		if(!extensionAvailable) {															\
+			LOG_WARN("Could not load instance-level Vulkan function named '" #name "' from extension '" #extension "' because '" #extension "' wasn't available.");\
+		}
+
 		#include "ListOfVulkanFunctions.inl"
 	}
 

@@ -30,8 +30,6 @@ int main()
     LoggerProvider::Initialize(std::move(logger));
     auto loader = std::make_shared<vkCore::LoaderImpl>();
 
-    auto desiredExtensions = std::vector<const char*>();
-    desiredExtensions.push_back("VK_KHR_win32_surface");
     auto instanceFactory = vkCore::VulkanInstanceFactoryImpl(loader);
 
     try {
@@ -40,7 +38,7 @@ int main()
         loader->LoadGlobalFunctions();
         loader->DiscoverAvailableExtensions();
 
-        auto instance = instanceFactory.CreateVulkanInstance("TestBed", Version(0, 0, 1), desiredExtensions);
+        auto instance = instanceFactory.CreateVulkanInstance("TestBed", Version(0, 0, 1));
         
     } catch (const Common::SpockException& e) {
         LOG_ERROR(e);
