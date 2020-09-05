@@ -39,7 +39,7 @@ int main()
         loader->DiscoverAvailableExtensions();
 
         auto instance = instanceFactory.CreateVulkanInstance("TestBed", Version(0, 0, 1));
-        
+
     } catch (const Common::SpockException& e) {
         LOG_ERROR(e);
     }

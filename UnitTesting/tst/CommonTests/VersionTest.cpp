@@ -38,4 +38,9 @@ namespace Spock::Common::UnitTesting
 		auto v4 = Version(1, 1, 1);
 		EXPECT_LT(v3, v4);
 	}
+
+	TEST(VersionTest, to_string) {
+		auto v1 = Version(1, 2, 3);
+		EXPECT_EQ(to_string(v1), "Version(1, 2, 3)");
+	}
 }
