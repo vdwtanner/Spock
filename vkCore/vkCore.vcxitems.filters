@@ -41,6 +41,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanPhysicalDevice.h">
       <Filter>Header</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanLogicalDevice.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\vdwta\source\repos\Spock\vkCore\vkCore\VulkanLogicalDeviceFactory.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\Loader.cpp">
@@ -56,6 +62,12 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanPhysicalDevice.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanLogicalDevice.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\vdwta\source\repos\Spock\vkCore\vkCore\private\VulkanLogicalDeviceFactory.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

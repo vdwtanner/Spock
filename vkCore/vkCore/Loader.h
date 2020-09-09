@@ -10,6 +10,7 @@
 #endif
 
 #include "vkCore/VulkanInstance.h"
+#include "vkCore/VulkanLogicalDevice.h"
 
 #include "Include/vulkan_core.h"
 
@@ -34,6 +35,8 @@ namespace Spock::vkCore
 		virtual void DiscoverAvailableExtensions() = 0;
 		virtual void LoadInstanceLevelFunctions(const VulkanInstance* instance) = 0;
 		virtual void LoadInstanceLevelFunctionsFromExtensions(const VulkanInstance* instance) = 0;
+		virtual void LoadDeviceLevelFunctions(const VulkanLogicalDevice* device) = 0;
+		virtual void LoadDeviceLevelFunctionsFromExtensions(const VulkanLogicalDevice* device) = 0;
 		virtual bool AreAllExtensionsAvailable(const std::vector<const char*>& desiredExtensions) const = 0;
 	};
 
@@ -47,7 +50,10 @@ namespace Spock::vkCore
 		void DiscoverAvailableExtensions() override;
 		void LoadInstanceLevelFunctions(const VulkanInstance* instance) override;
 		void LoadInstanceLevelFunctionsFromExtensions(const VulkanInstance* instance) override;
+		void LoadDeviceLevelFunctions(const VulkanLogicalDevice* device) override;
+		void LoadDeviceLevelFunctionsFromExtensions(const VulkanLogicalDevice* device) override;
 		bool AreAllExtensionsAvailable(const std::vector<const char*>& desiredExtensions) const override;
+		
 	private:
 		const int LIBRARY_LOADED = 1;
 		const int EXPORTED_FUNCTIONS_LOADED = 2;

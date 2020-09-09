@@ -30,7 +30,7 @@ namespace Spock::vkCore
 
 		uint32_t ToVkVersion(const Common::Version& version);
 		VkApplicationInfo MakeAppInfo(const std::string& appName, const Common::Version& appVersion);
-		VkInstanceCreateInfo MakeVkInstanceCreateInfo(const VkApplicationInfo* appInfo, const std::vector<const char*>& layers, const std::vector<const char*>& extensions);
+		VkInstanceCreateInfo MakeVkInstanceCreateInfo(const VkApplicationInfo* appInfo, const std::vector<const char*>& layers, const std::vector<const char*>& availableExtensions);
 		VkInstance MakeVkInstance(const VkInstanceCreateInfo* createInfo);
 	};
 }

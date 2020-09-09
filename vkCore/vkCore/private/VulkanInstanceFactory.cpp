@@ -44,7 +44,7 @@ namespace Spock::vkCore
 		return VK_MAKE_VERSION(version.major, version.minor, version.patch);
 	}
 
-	VkInstanceCreateInfo VulkanInstanceFactoryImpl::MakeVkInstanceCreateInfo(const VkApplicationInfo* appInfo, const std::vector<const char*>& layers, const std::vector<const char*>& extensions) {
+	VkInstanceCreateInfo VulkanInstanceFactoryImpl::MakeVkInstanceCreateInfo(const VkApplicationInfo* appInfo, const std::vector<const char*>& layers, const std::vector<const char*>& availableExtensions) {
 		return {
 			VkStructureType::VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
 			nullptr,
@@ -52,8 +52,8 @@ namespace Spock::vkCore
 			appInfo,
 			(uint32_t)layers.size(),
 			layers.empty() ? nullptr : &layers[0],
-			(uint32_t)extensions.size(),
-			extensions.empty() ? nullptr : &extensions[0]
+			(uint32_t)availableExtensions.size(),
+			availableExtensions.empty() ? nullptr : &availableExtensions[0]
 		};
 	}
 
@@ -62,7 +62,7 @@ namespace Spock::vkCore
 
 		VkResult result = vkCreateInstance(createInfo, nullptr, &instance);
 		if (result != VkResult::VK_SUCCESS) {
-			THROW_EXCEPTION(SpockException, "Failed to create Vulcan Instance. Result: " + result);
+			THROW_EXCEPTION(SpockException, "Failed to create Vulkan Instance. Result: " + result);
 		}
 		return instance;
 	}

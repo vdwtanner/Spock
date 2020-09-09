@@ -20,16 +20,20 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Consts.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Include\vulkan_core.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Loader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanLogicalDeviceFactory.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanFunctions.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanInstance.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanInstanceFactory.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanLogicalDevice.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanPhysicalDevice.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\Loader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanLogicalDeviceFactory.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanFunctions.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanInstance.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanInstanceFactory.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanLogicalDevice.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanPhysicalDevice.cpp" />
   </ItemGroup>
   <ItemGroup>

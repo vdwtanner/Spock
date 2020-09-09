@@ -99,7 +99,7 @@ namespace Spock::vkCore
 	}
 
 	void LoaderImpl::LoadInstanceLevelFunctionsFromExtensions(const VulkanInstance* instance) {
-		ASSERT_USAGE((loadStateBitmask & GLOBAL_FUNCTIONS_LOADED) > 0, "Must call GLOBAL_FUNCTIONS_LOADED() before LoadInstanceLevelFunctions().");
+		ASSERT_USAGE((loadStateBitmask & GLOBAL_FUNCTIONS_LOADED) > 0, "Must call GLOBAL_FUNCTIONS_LOADED() before LoadInstanceLevelFunctionsFromExtensions().");
 		LOG_INFO("\nLoading INSTANCE_LEVEL_VULKAN_FUNCTIONS_FROM_EXTENSIONS...");
 		auto handle = instance->GetVkInstanceHandle();
 		bool extensionAvailable;
@@ -118,7 +118,41 @@ namespace Spock::vkCore
 			}																				\
 		}																					\
 		if(!extensionAvailable) {															\
-			LOG_WARN("Could not load instance-level Vulkan function named '" #name "' from extension '" #extension "' because '" #extension "' wasn't available.");\
+			LOG_INFO("Could not load instance-level Vulkan function named '" #name "' from extension '" #extension "' because '" #extension "' wasn't available.");\
+		}
+
+		#include "vkCore/ListOfVulkanFunctions.inl"
+	}
+
+	void LoaderImpl::LoadDeviceLevelFunctions(const VulkanLogicalDevice* device) {
+		ASSERT_USAGE((loadStateBitmask & GLOBAL_FUNCTIONS_LOADED) > 0, "Must call GLOBAL_FUNCTIONS_LOADED() before LoadDeviceLevelFunctions().");
+		LOG_INFO("\nLoading DEVICE_LEVEL_VULKAN_FUNCTIONS...");
+		auto handle = device->GetVkDeviceHandle();
+		#define DEVICE_LEVEL_VULKAN_FUNCTION(name)										\
+		name = (PFN_##name)vkGetDeviceProcAddr(handle, #name);								\
+		if (name == nullptr) {																\
+			THROW_EXCEPTION(SpockException, "Could not load device-level Vulkan function named: " #name);\
+		} else {																			\
+			LOG_INFO("\tLoaded: " #name);													\
+		}
+
+		#include "vkCore/ListOfVulkanFunctions.inl"
+	}
+
+	void LoaderImpl::LoadDeviceLevelFunctionsFromExtensions(const VulkanLogicalDevice* device) {
+		ASSERT_USAGE((loadStateBitmask & GLOBAL_FUNCTIONS_LOADED) > 0, "Must call GLOBAL_FUNCTIONS_LOADED() before LoadDeviceLevelFunctionsFromExtensions().");
+		LOG_INFO("\nLoading DEVICE_LEVEL_VULKAN_FUNCTIONS_FROM_EXTENSIONS...");
+		auto handle = device->GetVkDeviceHandle();
+		#define DEVICE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION(name, extension)			\
+		if (device->IsExtensionSupported(extension)) {									\
+			name = (PFN_##name)vkGetDeviceProcAddr(handle, #name);					\
+			if (name == nullptr) {														\
+				THROW_EXCEPTION(SpockException, "Could not load device-level Vulkan function named '" #name "' from extension '" #extension);\
+			} else {																	\
+				LOG_INFO("\tLoaded: " #name);											\
+			}																			\
+		} else {																		\
+			LOG_INFO("Could not load device-level Vulkan function named '" #name "' from extension '" #extension "' because '" #extension "' wasn't available.");\
 		}
 
 		#include "vkCore/ListOfVulkanFunctions.inl"

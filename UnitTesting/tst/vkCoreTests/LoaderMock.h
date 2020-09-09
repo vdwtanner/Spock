@@ -13,6 +13,8 @@ namespace UnitTesting::vkCore
 		MOCK_METHOD(void, DiscoverAvailableExtensions, (), (override));
 		MOCK_METHOD(void, LoadInstanceLevelFunctions, (const Spock::vkCore::VulkanInstance* instance), (override));
 		MOCK_METHOD(void, LoadInstanceLevelFunctionsFromExtensions, (const Spock::vkCore::VulkanInstance* instance), (override));
+		MOCK_METHOD(void, LoadDeviceLevelFunctions, (const Spock::vkCore::VulkanLogicalDevice* device), (override));
+		MOCK_METHOD(void, LoadDeviceLevelFunctionsFromExtensions, (const Spock::vkCore::VulkanLogicalDevice* device), (override));
 		MOCK_METHOD(bool, AreAllExtensionsAvailable, (const std::vector<const char*>& desiredExtensions), (const, override));
 	};
 }

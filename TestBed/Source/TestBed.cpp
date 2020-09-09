@@ -10,6 +10,7 @@
 #include "vkCore/Loader.h"
 #include "vkCore/VulkanInstance.h"
 #include "vkCore/VulkanInstanceFactory.h"
+#include "vkCore/VulkanLogicalDeviceFactory.h"
 
 using namespace Spock;
 using namespace Common;
@@ -31,6 +32,10 @@ int main()
     auto loader = std::make_shared<vkCore::LoaderImpl>();
 
     auto instanceFactory = vkCore::VulkanInstanceFactoryImpl(loader);
+    auto logicalDeviceFactory = vkCore::VulkanLogicalDeviceFactoryImpl(loader);
+    std::vector<const char*> deviceExtensions = {
+        "VK_KHR_swapchain"
+    };
 
     try {
         loader->LoadVulkanLibrary();
@@ -39,6 +44,7 @@ int main()
         loader->DiscoverAvailableExtensions();
 
         auto instance = instanceFactory.CreateVulkanInstance("TestBed", Version(0, 0, 1));
+        auto logiDevice = logicalDeviceFactory.CreateLogicalVulkanDevice(*instance, deviceExtensions);
 
     } catch (const Common::SpockException& e) {
         LOG_ERROR(e);
