@@ -44,6 +44,7 @@ namespace Spock::vkCore
 	{
 	public:
 		LoaderImpl();
+		~LoaderImpl();
 		void LoadVulkanLibrary() override;
 		void LoadExportedFunctions() override;
 		void LoadGlobalFunctions() override;

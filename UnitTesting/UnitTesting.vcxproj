@@ -59,6 +59,11 @@
     <ClInclude Include="tst\CommonTestHeaders.h" />
     <ClInclude Include="tst\vkCoreTests\LoaderMock.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="C:\Users\vdwta\source\repos\Spock\vkCore\vkCore\PortedExtensionNames.inl">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

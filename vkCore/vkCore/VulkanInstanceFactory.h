@@ -9,6 +9,8 @@
 #include "vkCore/Loader.h"
 #include "Common/Version.h"
 
+#include "PortedExtensionNames.inl"
+
 namespace Spock::vkCore
 {
 	class VulkanInstanceFactory
@@ -25,7 +27,8 @@ namespace Spock::vkCore
 	private:
 		std::shared_ptr<Loader> loader;
 		const std::vector<const char*> requiredExtensions = {
-			VK_KHR_SURFACE_EXTENSION_NAME
+			VK_KHR_SURFACE_EXTENSION_NAME,
+			SPOCK_KHR_PORTED_SURFACE_EXTENSION_NAME
 		};
 
 		uint32_t ToVkVersion(const Common::Version& version);
@@ -34,4 +37,3 @@ namespace Spock::vkCore
 		VkInstance MakeVkInstance(const VkInstanceCreateInfo* createInfo);
 	};
 }
-

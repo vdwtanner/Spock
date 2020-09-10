@@ -18,12 +18,14 @@ namespace Spock::vkCore
 	public:
 		VulkanLogicalDevice(const VkDevice vkDeviceHandle, const std::vector<const char *> extensions, const QueueFamilyIndices queueFamilyIndices);
 		~VulkanLogicalDevice();
+		const void InitPostFunctionLoad();
 		const VkDevice GetVkDeviceHandle() const;
 		const bool IsExtensionSupported(const char* extensionName) const;
 	private:
 		const VkDevice vkDeviceHandle;
 		const QueueFamilyIndices queueFamilyIndices;
 		const std::vector<const char*> availableExtensions;
+		VkQueue graphicsQueue;
 	};
 }
 

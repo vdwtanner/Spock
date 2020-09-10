@@ -1,5 +1,4 @@
 #include "../VulkanLogicalDevice.h"
-#include "..\VulkanLogicalDevice.h"
 
 namespace Spock::vkCore
 {
@@ -10,6 +9,14 @@ namespace Spock::vkCore
 	VulkanLogicalDevice::~VulkanLogicalDevice() {
 		vkDestroyDevice(vkDeviceHandle, nullptr);
 	}
+	const void VulkanLogicalDevice::InitPostFunctionLoad() {
+		if (queueFamilyIndices.graphicsFamily.has_value()) {
+			vkGetDeviceQueue(vkDeviceHandle, queueFamilyIndices.graphicsFamily.value(), 0, &graphicsQueue);
+		} else {
+			graphicsQueue = VK_NULL_HANDLE;
+		}
+	}
+
 	const VkDevice VulkanLogicalDevice::GetVkDeviceHandle() const {
 		return vkDeviceHandle;
 	}

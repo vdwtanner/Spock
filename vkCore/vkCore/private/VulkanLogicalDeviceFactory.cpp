@@ -19,7 +19,8 @@ namespace Spock::vkCore
         auto device = std::make_unique<VulkanLogicalDevice>(vkDevice, extensions, indices);
         loader->LoadDeviceLevelFunctions(device.get());
         loader->LoadDeviceLevelFunctionsFromExtensions(device.get());
-        return std::unique_ptr<VulkanLogicalDevice>();
+        device->InitPostFunctionLoad();
+        return device;
     }
 
     VulkanPhysicalDevice VulkanLogicalDeviceFactoryImpl::PickPhysicalDevice(const std::vector<VulkanPhysicalDevice>& devices, const std::vector<const char*>& extensions) const{

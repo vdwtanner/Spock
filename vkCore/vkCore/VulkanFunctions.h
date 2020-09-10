@@ -1,5 +1,12 @@
 #pragma once
 
+#ifdef _WIN32
+#define VK_USE_PLATFORM_WIN32_KHR
+#elif __linux
+//TODO How to choose proper define? XLIB vs XCB
+#endif
+
+
 #define VK_NO_PROTOTYPES
 #include "vkCore/Include/vulkan.h"
 

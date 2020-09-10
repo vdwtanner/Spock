@@ -1,5 +1,7 @@
 #if defined _WIN32
 #include <windows.h>
+#elif defined __linux
+#include <dlfcn.h>
 #endif
 
 #include <vector>
@@ -18,6 +20,15 @@ namespace Spock::vkCore
 	LoaderImpl::LoaderImpl() {
 		vulkan_library = nullptr;
 		availableExtensions = std::vector< VkExtensionProperties>();
+	}
+
+	LoaderImpl::~LoaderImpl() {
+		#if defined _WIN32
+			FreeLibrary(vulkan_library);
+		#elif defined __linux
+			dlclose(vulkan_library);
+		#endif
+		vulkan_library = nullptr;
 	}
 
 	void LoaderImpl::LoadVulkanLibrary() {
@@ -156,6 +167,7 @@ namespace Spock::vkCore
 		}
 
 		#include "vkCore/ListOfVulkanFunctions.inl"
+#include "..\Loader.h"
 	}
 
 	bool LoaderImpl::AreAllExtensionsAvailable(const std::vector<const char*>& desiredExtensions) const {

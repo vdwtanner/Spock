@@ -17,12 +17,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Include\vulkan_core.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Include\vulkan.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Include\vk_platform.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Loader.h">
       <Filter>Header</Filter>
     </ClInclude>
@@ -44,8 +38,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanLogicalDevice.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\vdwta\source\repos\Spock\vkCore\vkCore\VulkanLogicalDeviceFactory.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanLogicalDeviceFactory.h">
       <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Include\vk_platform.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Include\vulkan.h">
+      <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -67,11 +67,14 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanLogicalDevice.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\vdwta\source\repos\Spock\vkCore\vkCore\private\VulkanLogicalDeviceFactory.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanLogicalDeviceFactory.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)vkCore\ListOfVulkanFunctions.inl" />
+    <None Include="C:\Users\vdwta\source\repos\Spock\vkCore\vkCore\PortedExtensionNames.inl">
+      <Filter>Source</Filter>
+    </None>
   </ItemGroup>
 </Project>
