@@ -15,6 +15,9 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Functional\Concepts.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Functional\Functional.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Functional\Optional.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\Logger\CoutLogger.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\Logger\Logger.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\Logger\LoggerChain.h" />

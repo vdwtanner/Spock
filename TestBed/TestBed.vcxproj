@@ -157,16 +157,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\GlfwRenderer.cpp" />
     <ClCompile Include="Source\private\TestApplication.cpp" />
-    <ClCompile Include="Source\TestRenderer.cpp" />
     <ClCompile Include="Source\TestBed.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\GlfwHelper.h" />
+    <ClInclude Include="Source\GlfwRenderer.h" />
     <ClInclude Include="Source\TestApplication.h" />
-    <ClInclude Include="Source\TestRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="vcpkg.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Update="C:\Users\vdwta\source\repos\Spock\Common\Common\Functional\private\Option.cpp">
+      <FileType>Document</FileType>
+    </ClCompile>
+    <ClCompile Update="C:\Users\vdwta\source\repos\Spock\Common\Common\Functional\private\Option.i">
+      <FileType>Document</FileType>
+    </ClCompile>
+    <ClCompile Update="C:\Users\vdwta\source\repos\Spock\Common\Common\Functional\private\Option.impl">
+      <FileType>Document</FileType>
+    </ClCompile>
+    <ClCompile Update="C:\Users\vdwta\source\repos\Spock\Common\Common\Functional\private\Option.inc">
+      <FileType>Document</FileType>
+    </ClCompile>
+    <ClCompile Update="C:\Users\vdwta\source\repos\Spock\Common\Common\Functional\private\Option.inl">
+      <FileType>Document</FileType>
+    </ClCompile>
+    <ClCompile Update="C:\Users\vdwta\source\repos\Spock\Common\Common\Functional\private\Option.tpp">
+      <FileType>Document</FileType>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Update="C:\Users\vdwta\source\repos\Spock\vkCore\vkCore\PortedExtensionNames.inl">

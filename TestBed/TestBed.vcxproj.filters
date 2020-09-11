@@ -18,18 +18,21 @@
     <ClCompile Include="Source\TestBed.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TestRenderer.cpp">
+    <ClCompile Include="Source\private\TestApplication.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\private\TestApplication.cpp">
+    <ClCompile Include="Source\GlfwRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\TestRenderer.h">
+    <ClInclude Include="Source\TestApplication.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\TestApplication.h">
+    <ClInclude Include="Source\GlfwRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GlfwHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

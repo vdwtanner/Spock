@@ -1,8 +1,5 @@
 #include "../TestApplication.h"
 
-#include "vkCore/Loader.h"  //Included first so that APIENTRY is defined before GLFW tries to define it
-#include <GLFW/glfw3.h>
-
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/vec4.hpp>
@@ -22,9 +19,8 @@ namespace Spock::Testbed
     using namespace vkCore;
 
     TestApplication::~TestApplication() {
-        if (window != nullptr) {
-            glfwDestroyWindow(window);
-        }
+        renderer.reset();
+        window.reset();
         glfwTerminate();
     }
 
@@ -33,9 +29,9 @@ namespace Spock::Testbed
         try {
             InitWindow();
             InitRenderer();
-        } catch (SpockException e) {
+        } catch (SpockException& e) {
             LOG_ERROR(e);
-            throw e;
+            exit(1);
         }
         
     }
@@ -52,18 +48,18 @@ namespace Spock::Testbed
 
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
-        window = glfwCreateWindow(800, 600, "Vulkan window", nullptr, nullptr);
+        window = std::unique_ptr<GLFWwindow, DestroyGlfwWindow>(glfwCreateWindow(800, 600, "Vulkan window", nullptr, nullptr));
     }
 
     const void TestApplication::InitRenderer() {
         auto loader = std::make_shared<vkCore::LoaderImpl>();
-        renderer = std::make_unique<TestRenderer>(loader);
+        renderer = std::make_unique<GlfwRenderer>(loader, window.get());
         renderer->Init();
     }
 
     const void TestApplication::Run() {
         try {
-            while (!glfwWindowShouldClose(window)) {
+            while (!glfwWindowShouldClose(window.get())) {
                 glfwPollEvents();
             }
         } catch (SpockException e) {

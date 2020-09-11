@@ -1,8 +1,8 @@
 #pragma once
 
 #include <memory>
-#include <optional>
 
+#include "Common/Functional/Optional.h"
 #include "PhysicalDevice.h"
 #include "VulkanFunctions.h"
 
@@ -10,7 +10,16 @@ namespace Spock::vkCore
 {
 	struct QueueFamilyIndices
 	{
-		std::optional<uint32_t> graphicsFamily;
+	public:
+		Common::Optional<uint32_t> graphicsFamily;
+		Common::Optional<uint32_t> presentFamily;
+
+		QueueFamilyIndices();
+		QueueFamilyIndices(const QueueFamilyIndices& other) = default;
+		QueueFamilyIndices(QueueFamilyIndices&& other) = default;
+		QueueFamilyIndices& operator=(QueueFamilyIndices& other) = default;
+
+		const bool IsComplete() const;
 	};
 
 	class LogicalDevice
@@ -26,5 +35,6 @@ namespace Spock::vkCore
 		const QueueFamilyIndices queueFamilyIndices;
 		const std::vector<const char*> availableExtensions;
 		VkQueue graphicsQueue;
+		VkQueue presentQueue;
 	};
 }

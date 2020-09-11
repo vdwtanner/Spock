@@ -49,6 +49,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="tst\CommonTestHeaders.cpp" />
+    <ClCompile Include="tst\CommonTests\Functional\OptionTest.cpp" />
     <ClCompile Include="tst\CommonTests\VersionTest.cpp" />
     <ClCompile Include="tst\vkCoreTests\VulkanInstanceFactoryTest.cpp" />
   </ItemGroup>
@@ -58,6 +59,26 @@
   <ItemGroup>
     <ClInclude Include="tst\CommonTestHeaders.h" />
     <ClInclude Include="tst\vkCoreTests\LoaderMock.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Update="C:\Users\vdwta\source\repos\Spock\Common\Common\Functional\private\Option.cpp">
+      <FileType>Document</FileType>
+    </ClCompile>
+    <ClCompile Update="C:\Users\vdwta\source\repos\Spock\Common\Common\Functional\private\Option.i">
+      <FileType>Document</FileType>
+    </ClCompile>
+    <ClCompile Update="C:\Users\vdwta\source\repos\Spock\Common\Common\Functional\private\Option.impl">
+      <FileType>Document</FileType>
+    </ClCompile>
+    <ClCompile Update="C:\Users\vdwta\source\repos\Spock\Common\Common\Functional\private\Option.inc">
+      <FileType>Document</FileType>
+    </ClCompile>
+    <ClCompile Update="C:\Users\vdwta\source\repos\Spock\Common\Common\Functional\private\Option.inl">
+      <FileType>Document</FileType>
+    </ClCompile>
+    <ClCompile Update="C:\Users\vdwta\source\repos\Spock\Common\Common\Functional\private\Option.tpp">
+      <FileType>Document</FileType>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Update="C:\Users\vdwta\source\repos\Spock\vkCore\vkCore\PortedExtensionNames.inl">

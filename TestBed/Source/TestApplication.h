@@ -2,9 +2,11 @@
 
 #include <memory>
 
-#include "TestRenderer.h"
+#include "GlfwHelper.h"
 
-struct GLFWwindow;
+#include "GlfwRenderer.h"
+#include "Common/Logger/Logger.h"
+
 namespace Spock::Testbed
 {
 	class TestApplication
@@ -16,8 +18,8 @@ namespace Spock::Testbed
 	private:
 		const int WINDOW_HEIGHT = 600;
 		const int WINDOW_WIDTH = 800;
-		GLFWwindow* window;
-		std::unique_ptr<TestRenderer> renderer;
+		std::unique_ptr<GLFWwindow, DestroyGlfwWindow> window;
+		std::unique_ptr<GlfwRenderer> renderer;
 
 		const void InitLogger();
 		const void InitWindow();

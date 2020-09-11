@@ -9,6 +9,12 @@
       <UniqueIdentifier>{39f7799d-4e4c-484e-9dee-0b9efd457113}</UniqueIdentifier>
       <Extensions>h</Extensions>
     </Filter>
+    <Filter Include="Header\Functional">
+      <UniqueIdentifier>{d7530cfd-5c6f-4a89-9c68-d41dd1bc03dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Functional">
+      <UniqueIdentifier>{133b7672-47cf-4d67-9876-a5b130b6546c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)Common\Logger\private\LoggerProvider.cpp">
@@ -54,6 +60,15 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\Version.h">
       <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Functional\Functional.h">
+      <Filter>Header\Functional</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Functional\Concepts.h">
+      <Filter>Header\Functional</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\vdwta\source\repos\Spock\Common\Common\Functional\Optional.h">
+      <Filter>Header\Functional</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
