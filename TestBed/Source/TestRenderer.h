@@ -3,7 +3,7 @@
 #include <memory>
 
 #include "vkCore/VulkanInstanceFactory.h"
-#include "vkCore/VulkanLogicalDeviceFactory.h"
+#include "vkCore/LogicalDeviceFactory.h"
 #include "vkCore/Loader.h"
 
 namespace Spock::Testbed
@@ -15,9 +15,9 @@ namespace Spock::Testbed
 		const void Init();
 	private:
 		const std::unique_ptr<vkCore::VulkanInstanceFactory> instanceFactory;
-		const std::unique_ptr<vkCore::VulkanLogicalDeviceFactory> logicalDeviceFactory;
+		const std::unique_ptr<vkCore::LogicalDeviceFactory> logicalDeviceFactory;
 		std::unique_ptr<vkCore::VulkanInstance> instance;
-		std::unique_ptr<vkCore::VulkanLogicalDevice> device;
+		std::unique_ptr<vkCore::LogicalDevice> device;
 	};
 }
 

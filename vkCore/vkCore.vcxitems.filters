@@ -32,13 +32,13 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanInstanceFactory.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanPhysicalDevice.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\PhysicalDevice.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanLogicalDevice.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\LogicalDevice.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanLogicalDeviceFactory.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\LogicalDeviceFactory.h">
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Include\vk_platform.h">
@@ -61,20 +61,18 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanInstanceFactory.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanPhysicalDevice.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\PhysicalDevice.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanLogicalDevice.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\LogicalDevice.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanLogicalDeviceFactory.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\LogicalDeviceFactory.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)vkCore\ListOfVulkanFunctions.inl" />
-    <None Include="C:\Users\vdwta\source\repos\Spock\vkCore\vkCore\PortedExtensionNames.inl">
-      <Filter>Source</Filter>
-    </None>
+    <None Include="$(MSBuildThisFileDirectory)vkCore\PortedExtensionNames.inl" />
   </ItemGroup>
 </Project>

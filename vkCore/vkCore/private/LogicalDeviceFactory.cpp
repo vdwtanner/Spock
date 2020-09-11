@@ -1,4 +1,4 @@
-#include "..\VulkanLogicalDeviceFactory.h"
+#include "..\LogicalDeviceFactory.h"
 
 #include <map>
 #include "Common/SpockException.h"
@@ -8,23 +8,23 @@ namespace Spock::vkCore
 {
     using namespace Common;
 
-    VulkanLogicalDeviceFactoryImpl::VulkanLogicalDeviceFactoryImpl(std::shared_ptr<Loader> loader) : loader(loader) {
+    LogicalDeviceFactoryImpl::LogicalDeviceFactoryImpl(std::shared_ptr<Loader> loader) : loader(loader) {
     }
 
-    std::unique_ptr<VulkanLogicalDevice> Spock::vkCore::VulkanLogicalDeviceFactoryImpl::CreateLogicalVulkanDevice(const VulkanInstance& vulkanInstance, const std::vector<const char*>& extensions) {
+    std::unique_ptr<LogicalDevice> Spock::vkCore::LogicalDeviceFactoryImpl::CreateLogicalVulkanDevice(const VulkanInstance& vulkanInstance, const std::vector<const char*>& extensions) {
         auto physicalDevices = vulkanInstance.EnumeratePhysicalDevices();
         auto physicalDevice = PickPhysicalDevice(physicalDevices, extensions);
         auto indices = DetermineQueueFamilyIndices(physicalDevice);
         auto vkDevice = MakeLogicalDevice(physicalDevice, extensions, indices);
-        auto device = std::make_unique<VulkanLogicalDevice>(vkDevice, extensions, indices);
+        auto device = std::make_unique<LogicalDevice>(vkDevice, extensions, indices);
         loader->LoadDeviceLevelFunctions(device.get());
         loader->LoadDeviceLevelFunctionsFromExtensions(device.get());
         device->InitPostFunctionLoad();
         return device;
     }
 
-    VulkanPhysicalDevice VulkanLogicalDeviceFactoryImpl::PickPhysicalDevice(const std::vector<VulkanPhysicalDevice>& devices, const std::vector<const char*>& extensions) const{
-        std::multimap<int, VulkanPhysicalDevice> candidates;
+    PhysicalDevice LogicalDeviceFactoryImpl::PickPhysicalDevice(const std::vector<PhysicalDevice>& devices, const std::vector<const char*>& extensions) const{
+        std::multimap<int, PhysicalDevice> candidates;
 
         for (auto& device : devices) {
             candidates.insert(std::make_pair(RateDeviceSuitability(device, extensions), device));
@@ -37,7 +37,7 @@ namespace Spock::vkCore
         }
     }
 
-    int VulkanLogicalDeviceFactoryImpl::RateDeviceSuitability(const VulkanPhysicalDevice& device, const std::vector<const char*>& extensions) const{
+    int LogicalDeviceFactoryImpl::RateDeviceSuitability(const PhysicalDevice& device, const std::vector<const char*>& extensions) const{
         auto properties = device.FetchPhysicalDeviceProperties();
         auto features = device.FetchPhysicalDeviceFeatures();
 
@@ -59,7 +59,7 @@ namespace Spock::vkCore
         return score;
     }
 
-    QueueFamilyIndices VulkanLogicalDeviceFactoryImpl::DetermineQueueFamilyIndices(const VulkanPhysicalDevice device) const {
+    QueueFamilyIndices LogicalDeviceFactoryImpl::DetermineQueueFamilyIndices(const PhysicalDevice device) const {
         QueueFamilyIndices indices;
         auto queueFamilyProperties = device.FetchQueueFamilyProperties();
 
@@ -79,7 +79,7 @@ namespace Spock::vkCore
         return indices;
     }
 
-    VkDevice VulkanLogicalDeviceFactoryImpl::MakeLogicalDevice(const VulkanPhysicalDevice device, const std::vector<const char*>& extensions, const QueueFamilyIndices indices) const{
+    VkDevice LogicalDeviceFactoryImpl::MakeLogicalDevice(const PhysicalDevice device, const std::vector<const char*>& extensions, const QueueFamilyIndices indices) const{
         auto queueCreateInfos = MakeDeviceQueueCreateInfos(indices);
         auto features = MakeDeviceFeatureRequest(device);
         VkDeviceCreateInfo createInfo{};
@@ -99,14 +99,14 @@ namespace Spock::vkCore
         return logicalDevice;
     }
 
-    std::vector<VkDeviceQueueCreateInfo> VulkanLogicalDeviceFactoryImpl::MakeDeviceQueueCreateInfos(const QueueFamilyIndices indices) const {
+    std::vector<VkDeviceQueueCreateInfo> LogicalDeviceFactoryImpl::MakeDeviceQueueCreateInfos(const QueueFamilyIndices indices) const {
         auto infos = std::vector<VkDeviceQueueCreateInfo>();
         infos.push_back(MakeDeviceQueueCreateInfo(indices.graphicsFamily.value()));
 
         return infos;
     }
 
-    VkDeviceQueueCreateInfo VulkanLogicalDeviceFactoryImpl::MakeDeviceQueueCreateInfo(const int index) const {
+    VkDeviceQueueCreateInfo LogicalDeviceFactoryImpl::MakeDeviceQueueCreateInfo(const int index) const {
         VkDeviceQueueCreateInfo info{};
         info.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
         info.queueFamilyIndex = index;
@@ -116,7 +116,7 @@ namespace Spock::vkCore
         return info;
     }
 
-    VkPhysicalDeviceFeatures VulkanLogicalDeviceFactoryImpl::MakeDeviceFeatureRequest(const VulkanPhysicalDevice device) const {
+    VkPhysicalDeviceFeatures LogicalDeviceFactoryImpl::MakeDeviceFeatureRequest(const PhysicalDevice device) const {
         //No special features needed at this time
         VkPhysicalDeviceFeatures features{};
         return features;

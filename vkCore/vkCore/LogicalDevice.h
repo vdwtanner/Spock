@@ -3,7 +3,7 @@
 #include <memory>
 #include <optional>
 
-#include "VulkanPhysicalDevice.h"
+#include "PhysicalDevice.h"
 #include "VulkanFunctions.h"
 
 namespace Spock::vkCore
@@ -13,11 +13,11 @@ namespace Spock::vkCore
 		std::optional<uint32_t> graphicsFamily;
 	};
 
-	class VulkanLogicalDevice
+	class LogicalDevice
 	{
 	public:
-		VulkanLogicalDevice(const VkDevice vkDeviceHandle, const std::vector<const char *> extensions, const QueueFamilyIndices queueFamilyIndices);
-		~VulkanLogicalDevice();
+		LogicalDevice(const VkDevice vkDeviceHandle, const std::vector<const char *> extensions, const QueueFamilyIndices queueFamilyIndices);
+		~LogicalDevice();
 		const void InitPostFunctionLoad();
 		const VkDevice GetVkDeviceHandle() const;
 		const bool IsExtensionSupported(const char* extensionName) const;
@@ -28,5 +28,3 @@ namespace Spock::vkCore
 		VkQueue graphicsQueue;
 	};
 }
-
-

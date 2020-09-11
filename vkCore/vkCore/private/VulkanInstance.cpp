@@ -19,12 +19,12 @@ namespace Spock::vkCore
 		return vkInstanceHandle;
 	}
 
-	const std::vector<VulkanPhysicalDevice> VulkanInstance::EnumeratePhysicalDevices() const {
+	const std::vector<PhysicalDevice> VulkanInstance::EnumeratePhysicalDevices() const {
 		auto vkPhysicalDevices = EnumerateVkPhysicalDevices();
 
-		auto vulkanPhysicalDevices = std::vector<VulkanPhysicalDevice>();
+		auto vulkanPhysicalDevices = std::vector<PhysicalDevice>();
 		for (auto& vkPhysicalDevice : vkPhysicalDevices) {
-			vulkanPhysicalDevices.push_back(VulkanPhysicalDevice(vkPhysicalDevice));
+			vulkanPhysicalDevices.push_back(PhysicalDevice(vkPhysicalDevice));
 		}
 		
 		return vulkanPhysicalDevices;

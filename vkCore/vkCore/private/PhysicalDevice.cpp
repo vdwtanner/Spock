@@ -1,4 +1,4 @@
-#include "../VulkanPhysicalDevice.h"
+#include "../PhysicalDevice.h"
 
 #include "vkCore/VulkanFunctions.h"
 #include "Common/SpockException.h"
@@ -8,28 +8,28 @@ namespace Spock::vkCore
 {
 	using namespace Common;
 
-	VulkanPhysicalDevice::VulkanPhysicalDevice(const VkPhysicalDevice vkDeviceHandle)
+	PhysicalDevice::PhysicalDevice(const VkPhysicalDevice vkDeviceHandle)
 		: vkDeviceHandle(vkDeviceHandle) {
 		LoadExtensions();
 	}
 
-	const VkPhysicalDevice VulkanPhysicalDevice::GetVkPhysicalDeviceHandle() const {
+	const VkPhysicalDevice PhysicalDevice::GetVkPhysicalDeviceHandle() const {
 		return vkDeviceHandle;
 	}
 
-	const VkPhysicalDeviceFeatures VulkanPhysicalDevice::FetchPhysicalDeviceFeatures() const {
+	const VkPhysicalDeviceFeatures PhysicalDevice::FetchPhysicalDeviceFeatures() const {
 		VkPhysicalDeviceFeatures features;
 		vkGetPhysicalDeviceFeatures(vkDeviceHandle, &features);
 		return features;
 	}
 
-	const VkPhysicalDeviceProperties VulkanPhysicalDevice::FetchPhysicalDeviceProperties() const {
+	const VkPhysicalDeviceProperties PhysicalDevice::FetchPhysicalDeviceProperties() const {
 		VkPhysicalDeviceProperties properties;
 		vkGetPhysicalDeviceProperties(vkDeviceHandle, &properties);
 		return properties;
 	}
 
-	const std::vector<VkQueueFamilyProperties> VulkanPhysicalDevice::FetchQueueFamilyProperties() const {
+	const std::vector<VkQueueFamilyProperties> PhysicalDevice::FetchQueueFamilyProperties() const {
 		uint32_t numQueueFamilyProperties;
 		vkGetPhysicalDeviceQueueFamilyProperties(vkDeviceHandle, &numQueueFamilyProperties, nullptr);
 
@@ -38,11 +38,11 @@ namespace Spock::vkCore
 		return queueFamilyProperties;
 	}
 
-	const std::vector<VkExtensionProperties> VulkanPhysicalDevice::GetExtensionProperties() const{
+	const std::vector<VkExtensionProperties> PhysicalDevice::GetExtensionProperties() const{
 		return availableExtensions;
 	}
 
-	const bool VulkanPhysicalDevice::AreAllExtensionsSupported(const std::vector<const char*> desiredExtensions) const{
+	const bool PhysicalDevice::AreAllExtensionsSupported(const std::vector<const char*> desiredExtensions) const{
 		for (auto& extension : desiredExtensions) {
 			if (!IsExtensionSupported(extension)) {
 				LOG_INFO(std::string(extension) + " is not supported.");
@@ -52,7 +52,7 @@ namespace Spock::vkCore
 		return true;
 	}
 
-	void VulkanPhysicalDevice::LoadExtensions() {
+	void PhysicalDevice::LoadExtensions() {
 		uint32_t numExtensions;
 		auto result = vkEnumerateDeviceExtensionProperties(vkDeviceHandle, nullptr, &numExtensions, nullptr);
 		if (result != VkResult::VK_SUCCESS) {
@@ -66,7 +66,7 @@ namespace Spock::vkCore
 		}
 	}
 
-	const bool VulkanPhysicalDevice::IsExtensionSupported(const char* extension) const {
+	const bool PhysicalDevice::IsExtensionSupported(const char* extension) const {
 		for (auto& availableExtension : availableExtensions) {
 			if (strcmp(extension, availableExtension.extensionName) == 0) {
 				return true;

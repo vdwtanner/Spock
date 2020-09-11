@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "vkCore/VulkanFunctions.h"
-#include "vkCore/VulkanPhysicalDevice.h"
+#include "vkCore/PhysicalDevice.h"
 
 namespace Spock::vkCore
 {
@@ -13,7 +13,7 @@ namespace Spock::vkCore
 		VulkanInstance(VkInstance handle);
 		~VulkanInstance();
 		const VkInstance GetVkInstanceHandle() const;
-		const std::vector<VulkanPhysicalDevice> EnumeratePhysicalDevices() const;
+		const std::vector<PhysicalDevice> EnumeratePhysicalDevices() const;
 	private:
 		const VkInstance vkInstanceHandle;
 

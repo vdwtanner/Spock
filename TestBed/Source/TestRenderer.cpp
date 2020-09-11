@@ -9,7 +9,7 @@ namespace Spock::Testbed
 
 	Spock::Testbed::TestRenderer::TestRenderer(std::shared_ptr<Loader> loader)
 		: instanceFactory(std::make_unique<VulkanInstanceFactoryImpl>(loader)),
-		logicalDeviceFactory(std::make_unique<VulkanLogicalDeviceFactoryImpl>(loader)) {
+		logicalDeviceFactory(std::make_unique<LogicalDeviceFactoryImpl>(loader)) {
 		loader->LoadVulkanLibrary();
 		loader->LoadExportedFunctions();
 		loader->LoadGlobalFunctions();

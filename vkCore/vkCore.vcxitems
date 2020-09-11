@@ -20,21 +20,21 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Include\vulkan.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Include\vulkan_core.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Loader.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanLogicalDeviceFactory.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\LogicalDeviceFactory.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanFunctions.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanInstance.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanInstanceFactory.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanLogicalDevice.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanPhysicalDevice.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\LogicalDevice.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\PhysicalDevice.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\Loader.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanLogicalDeviceFactory.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\LogicalDeviceFactory.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanFunctions.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanInstance.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanInstanceFactory.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanLogicalDevice.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanPhysicalDevice.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\LogicalDevice.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\PhysicalDevice.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)vkCore\ListOfVulkanFunctions.inl" />

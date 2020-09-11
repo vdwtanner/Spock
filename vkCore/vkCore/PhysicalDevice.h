@@ -7,10 +7,10 @@
 
 namespace Spock::vkCore
 {
-	class VulkanPhysicalDevice
+	class PhysicalDevice
 	{
 	public:
-		VulkanPhysicalDevice(const VkPhysicalDevice vkDeviceHandle);
+		PhysicalDevice(const VkPhysicalDevice vkDeviceHandle);
 		const VkPhysicalDevice GetVkPhysicalDeviceHandle() const;
 		const VkPhysicalDeviceFeatures FetchPhysicalDeviceFeatures() const;
 		const VkPhysicalDeviceProperties FetchPhysicalDeviceProperties() const;

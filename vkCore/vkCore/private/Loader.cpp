@@ -135,7 +135,7 @@ namespace Spock::vkCore
 		#include "vkCore/ListOfVulkanFunctions.inl"
 	}
 
-	void LoaderImpl::LoadDeviceLevelFunctions(const VulkanLogicalDevice* device) {
+	void LoaderImpl::LoadDeviceLevelFunctions(const LogicalDevice* device) {
 		ASSERT_USAGE((loadStateBitmask & GLOBAL_FUNCTIONS_LOADED) > 0, "Must call GLOBAL_FUNCTIONS_LOADED() before LoadDeviceLevelFunctions().");
 		LOG_INFO("\nLoading DEVICE_LEVEL_VULKAN_FUNCTIONS...");
 		auto handle = device->GetVkDeviceHandle();
@@ -150,7 +150,7 @@ namespace Spock::vkCore
 		#include "vkCore/ListOfVulkanFunctions.inl"
 	}
 
-	void LoaderImpl::LoadDeviceLevelFunctionsFromExtensions(const VulkanLogicalDevice* device) {
+	void LoaderImpl::LoadDeviceLevelFunctionsFromExtensions(const LogicalDevice* device) {
 		ASSERT_USAGE((loadStateBitmask & GLOBAL_FUNCTIONS_LOADED) > 0, "Must call GLOBAL_FUNCTIONS_LOADED() before LoadDeviceLevelFunctionsFromExtensions().");
 		LOG_INFO("\nLoading DEVICE_LEVEL_VULKAN_FUNCTIONS_FROM_EXTENSIONS...");
 		auto handle = device->GetVkDeviceHandle();
