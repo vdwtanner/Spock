@@ -121,4 +121,59 @@ namespace Spock::Common::UnitTesting
 
 		EXPECT_EQ(std::string("Final value is 10.000000"), str.Get());
 	}
+
+	TEST(OptionTest, Empty_Assignment_ofValue) {
+		auto sut = Optional<int>::empty();
+		sut = 6;
+
+		EXPECT_EQ(6, sut.Get());
+	}
+
+	TEST(OptionTest, Empty_Assignment_ofOptional) {
+		auto sut = Optional<int>::empty();
+		sut = Optional<int>::of(6);
+
+		EXPECT_EQ(6, sut.Get());
+	}
+
+	TEST(OptionTest, NonEmpty_Comparisons_rhsIsOptional) {
+		auto sut = Optional<int>::of(5);
+
+		EXPECT_EQ(sut, Optional<int>::of(5));
+		EXPECT_NE(sut, Optional<int>::of(6));
+		EXPECT_NE(sut, Optional<int>::empty());
+		EXPECT_LT(sut, Optional<int>::of(6));
+		EXPECT_GT(sut, Optional<int>::of(4));
+		EXPECT_LE(sut, Optional<int>::of(6));
+		EXPECT_LE(sut, Optional<int>::of(5));
+		EXPECT_GE(sut, Optional<int>::of(4));
+		EXPECT_GE(sut, Optional<int>::of(5));
+	}
+
+	TEST(OptionTest, NonEmpty_Comparisons_rhsIsValue) {
+		auto sut = Optional<int>::of(5);
+
+		EXPECT_EQ(sut, 5);
+		EXPECT_NE(sut, 4);
+		EXPECT_LT(sut, 6);
+		EXPECT_GT(sut, 4);
+		EXPECT_LE(sut, 6);
+		EXPECT_LE(sut, 5);
+		EXPECT_GE(sut, 4);
+		EXPECT_GE(sut, 5);
+	}
+
+	TEST(OptionTest, Empty_Comparisions) {
+		auto sut = Optional<int>::empty();
+
+		EXPECT_EQ(sut, Optional<int>::empty());
+		EXPECT_NE(sut, Optional<int>::of(1));
+		EXPECT_NE(sut, 1);
+		EXPECT_LT(sut, 0);
+		EXPECT_LT(sut, Optional<int>::of(1));
+		EXPECT_LE(sut, 0);
+		EXPECT_LE(sut, Optional<int>::of(1));
+		EXPECT_LE(sut, Optional<int>::empty());
+		EXPECT_GE(sut, Optional<int>::empty());
+	}
 }

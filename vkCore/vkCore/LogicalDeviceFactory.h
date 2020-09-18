@@ -11,14 +11,14 @@ namespace Spock::vkCore
 	class LogicalDeviceFactory
 	{
 	public:
-		virtual std::unique_ptr<LogicalDevice> CreateLogicalVulkanDevice(const VulkanInstance& vulkanInstance, const std::vector<const char*>& extensions, const PhysicalDeviceSelector& deviceSelector, const Surface* surface = nullptr) = 0;
+		virtual std::shared_ptr<LogicalDevice> CreateLogicalVulkanDevice(const VulkanInstance& vulkanInstance, const std::vector<const char*>& extensions, const PhysicalDeviceSelector& deviceSelector, const Surface* surface = nullptr) = 0;
 	};
 
 	class LogicalDeviceFactoryImpl : public LogicalDeviceFactory
 	{
 	public:
 		LogicalDeviceFactoryImpl(std::shared_ptr<Loader> loader);
-		std::unique_ptr<LogicalDevice> CreateLogicalVulkanDevice(const VulkanInstance& vulkanInstance, const std::vector<const char*>& extensions, const PhysicalDeviceSelector& deviceSelector, const Surface* surface = nullptr) override;
+		std::shared_ptr<LogicalDevice> CreateLogicalVulkanDevice(const VulkanInstance& vulkanInstance, const std::vector<const char*>& extensions, const PhysicalDeviceSelector& deviceSelector, const Surface* surface = nullptr) override;
 	private:
 		std::shared_ptr<Loader> loader;
 		const float defaultQueuePriority = 1.0f;

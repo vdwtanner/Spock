@@ -14,12 +14,12 @@ namespace Spock::vkCore
     LogicalDeviceFactoryImpl::LogicalDeviceFactoryImpl(std::shared_ptr<Loader> loader) : loader(loader) {
     }
 
-    std::unique_ptr<LogicalDevice> Spock::vkCore::LogicalDeviceFactoryImpl::CreateLogicalVulkanDevice(const VulkanInstance& vulkanInstance, const std::vector<const char*>& extensions, const PhysicalDeviceSelector& deviceSelector, const Surface* surface) {
+    std::shared_ptr<LogicalDevice> Spock::vkCore::LogicalDeviceFactoryImpl::CreateLogicalVulkanDevice(const VulkanInstance& vulkanInstance, const std::vector<const char*>& extensions, const PhysicalDeviceSelector& deviceSelector, const Surface* surface) {
         auto physicalDevices = vulkanInstance.EnumeratePhysicalDevices();
         auto physicalDevice = deviceSelector.SelectPhysicalDevice(physicalDevices, extensions);
         auto indices = DetermineQueueFamilyIndices(physicalDevice, surface);
         auto vkDevice = MakeLogicalDevice(physicalDevice, extensions, indices);
-        auto device = std::make_unique<LogicalDevice>(vkDevice, extensions, indices);
+        auto device = std::make_shared<LogicalDevice>(vkDevice, physicalDevice, extensions, indices);
         loader->LoadDeviceLevelFunctions(device.get());
         loader->LoadDeviceLevelFunctionsFromExtensions(device.get());
         device->InitPostFunctionLoad();

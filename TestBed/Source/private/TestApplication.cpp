@@ -48,7 +48,7 @@ namespace Spock::Testbed
 
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
-        window = std::unique_ptr<GLFWwindow, DestroyGlfwWindow>(glfwCreateWindow(800, 600, "Vulkan window", nullptr, nullptr));
+        window = std::unique_ptr<GLFWwindow, DestroyGlfwWindow>(glfwCreateWindow(WINDOW_HEIGHT, WINDOW_WIDTH, "Vulkan window", nullptr, nullptr));
     }
 
     const void TestApplication::InitRenderer() {

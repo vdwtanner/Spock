@@ -25,13 +25,16 @@ namespace Spock::vkCore
 	class LogicalDevice
 	{
 	public:
-		LogicalDevice(const VkDevice vkDeviceHandle, const std::vector<const char *> extensions, const QueueFamilyIndices queueFamilyIndices);
+		LogicalDevice(const VkDevice vkDeviceHandle, const PhysicalDevice physicalDevice, const std::vector<const char *> extensions, const QueueFamilyIndices queueFamilyIndices);
 		~LogicalDevice();
 		const void InitPostFunctionLoad();
 		const VkDevice GetVkDeviceHandle() const;
+		const PhysicalDevice GetPhysicalDevice() const;
+		const QueueFamilyIndices GetQueueFamilyIndices() const;
 		const bool IsExtensionSupported(const char* extensionName) const;
 	private:
 		const VkDevice vkDeviceHandle;
+		const PhysicalDevice physicalDevice;
 		const QueueFamilyIndices queueFamilyIndices;
 		const std::vector<const char*> availableExtensions;
 		VkQueue graphicsQueue;

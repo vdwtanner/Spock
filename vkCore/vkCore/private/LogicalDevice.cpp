@@ -14,8 +14,8 @@ namespace Spock::vkCore
 		return graphicsFamily.IsPresent() && presentFamily.IsPresent();
 	}
 
-	LogicalDevice::LogicalDevice(const VkDevice vkDeviceHandle, const std::vector<const char*> extensions, const QueueFamilyIndices queueFamilyIndices)
-		: vkDeviceHandle(vkDeviceHandle), availableExtensions(extensions), queueFamilyIndices(queueFamilyIndices) {
+	LogicalDevice::LogicalDevice(const VkDevice vkDeviceHandle, const PhysicalDevice physicalDevice, const std::vector<const char*> extensions, const QueueFamilyIndices queueFamilyIndices)
+		: vkDeviceHandle(vkDeviceHandle), physicalDevice(physicalDevice), availableExtensions(extensions), queueFamilyIndices(queueFamilyIndices) {
 		graphicsQueue = VK_NULL_HANDLE;
 		presentQueue = VK_NULL_HANDLE;
 	}
@@ -30,6 +30,14 @@ namespace Spock::vkCore
 
 	const VkDevice LogicalDevice::GetVkDeviceHandle() const {
 		return vkDeviceHandle;
+	}
+
+	const PhysicalDevice LogicalDevice::GetPhysicalDevice() const {
+		return physicalDevice;
+	}
+
+	const QueueFamilyIndices LogicalDevice::GetQueueFamilyIndices() const {
+		return queueFamilyIndices;
 	}
 
 	const bool LogicalDevice::IsExtensionSupported(const char* extensionName) const {

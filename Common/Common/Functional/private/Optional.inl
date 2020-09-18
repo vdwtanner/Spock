@@ -4,12 +4,14 @@
 namespace Spock::Common
 {
 	template<typename T>
-	const Optional<T> Optional<T>::operator=(const Optional<T>& rhs) {
-		return Optional<T>(rhs.value, rhs.present);
+	const void Optional<T>::operator=(const Optional<T>& rhs) {
+		value = rhs.value;
+		present = rhs.present;
 	}
 	template<typename T>
-	const Optional<T> Optional<T>::operator=(const T& rhs) {
-		return Optional<T>::of(rhs);
+	const void Optional<T>::operator=(const T& rhs) {
+		value = rhs;
+		present = true;
 	}
 
 	template<typename T>

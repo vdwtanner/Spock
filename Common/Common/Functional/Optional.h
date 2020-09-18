@@ -22,9 +22,28 @@ namespace Spock::Common
 
 		Optional<T>(const Optional<T>& other) = default;
 		Optional<T>(Optional<T>&& other) = default;
-		const Optional<T> operator=(const Optional<T>& rhs);
-		const Optional<T> operator=(const T& rhs);
+		const void operator=(const Optional<T>& rhs);
+		const void operator=(const T& rhs);
 		Optional<T>& operator=(Optional<T>&& rhs) = default;
+		auto operator<=>(const Optional<T>& rhs) const { 
+			if (!present && !rhs.present) { return std::strong_ordering::equal; }
+			if (present && !rhs.present) { return std::strong_ordering::greater; }
+			if (!present && rhs.present) { return std::strong_ordering::less; }
+			return value <=> rhs.value;
+		}
+		bool operator==(const Optional<T>& rhs) const { 
+			if (!present && !rhs.present) { return true; }
+			if (present ^ rhs.present) { return false; }
+			return value == rhs.value;
+		}
+		auto operator<=>(const T& rhs) const {
+			if (!present) { return std::strong_ordering::less; }
+			return value <=> rhs;
+		}
+		bool operator==(const T& rhs) const {
+			if (!present) { return false; }
+			return value == rhs;
+		}
 
 		const bool IsPresent() const;
 		const bool IsEmpty() const;
@@ -45,8 +64,8 @@ namespace Spock::Common
 		requires ObjReturns<T, ObjectRef, Functor, Result>
 			const Optional<Result> Map(ObjectRef ref, Functor function) const;
 	private:
-		const T value;
-		const bool present;
+		T value;
+		bool present;
 
 		Optional<T>() : present(false), value() {}
 		Optional<T>(T value) : value(value), present(true) {}
