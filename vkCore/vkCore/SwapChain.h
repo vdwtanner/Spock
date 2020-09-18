@@ -11,10 +11,17 @@ namespace Spock::vkCore
 	class SwapChain
 	{
 	public:
-		SwapChain(const VkSwapchainKHR handle, const std::shared_ptr<LogicalDevice> logicalDevice);
+		SwapChain(const VkSwapchainKHR handle, const std::shared_ptr<LogicalDevice> logicalDevice, const VkFormat format, const VkExtent2D extent);
 		~SwapChain();
 	private:
-		const VkSwapchainKHR vkSwapChain;
+		const VkSwapchainKHR vkSwapChainHandle;
 		const std::shared_ptr<LogicalDevice> logicalDevice;
+		const VkFormat format;
+		const VkExtent2D extent;
+		const std::vector<VkImage> images;
+		const std::vector<VkImageView> imageViews;
+
+		std::vector<VkImage> FetchImages() const;
+		std::vector<VkImageView> CreateImageViews() const;
 	};
 }

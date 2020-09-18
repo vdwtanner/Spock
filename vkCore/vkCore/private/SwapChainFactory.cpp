@@ -21,7 +21,7 @@ namespace Spock::vkCore
 		auto swapExtent = ChooseSwapExtent(capabilities, desiredExtent);
 
 		auto vkSwapchain = CreateVkSwapchain(*logicalDevice, surface, surfaceFormat, presentMode, swapExtent, capabilities);
-		auto swapChain = std::make_unique<SwapChain>(vkSwapchain, logicalDevice);
+		auto swapChain = std::make_unique<SwapChain>(vkSwapchain, logicalDevice, surfaceFormat.format, swapExtent);
 		return swapChain;
 	}
 
