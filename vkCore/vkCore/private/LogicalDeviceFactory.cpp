@@ -14,9 +14,9 @@ namespace Spock::vkCore
     LogicalDeviceFactoryImpl::LogicalDeviceFactoryImpl(std::shared_ptr<Loader> loader) : loader(loader) {
     }
 
-    std::unique_ptr<LogicalDevice> Spock::vkCore::LogicalDeviceFactoryImpl::CreateLogicalVulkanDevice(const VulkanInstance& vulkanInstance, const std::vector<const char*>& extensions, const Surface* surface) {
+    std::unique_ptr<LogicalDevice> Spock::vkCore::LogicalDeviceFactoryImpl::CreateLogicalVulkanDevice(const VulkanInstance& vulkanInstance, const std::vector<const char*>& extensions, const PhysicalDeviceSelector& deviceSelector, const Surface* surface) {
         auto physicalDevices = vulkanInstance.EnumeratePhysicalDevices();
-        auto physicalDevice = PickPhysicalDevice(physicalDevices, extensions);
+        auto physicalDevice = deviceSelector.SelectPhysicalDevice(physicalDevices, extensions);
         auto indices = DetermineQueueFamilyIndices(physicalDevice, surface);
         auto vkDevice = MakeLogicalDevice(physicalDevice, extensions, indices);
         auto device = std::make_unique<LogicalDevice>(vkDevice, extensions, indices);
@@ -24,42 +24,6 @@ namespace Spock::vkCore
         loader->LoadDeviceLevelFunctionsFromExtensions(device.get());
         device->InitPostFunctionLoad();
         return device;
-    }
-
-    PhysicalDevice LogicalDeviceFactoryImpl::PickPhysicalDevice(const std::vector<PhysicalDevice>& devices, const std::vector<const char*>& extensions) const{
-        std::multimap<int, PhysicalDevice> candidates;
-
-        for (auto& device : devices) {
-            candidates.insert(std::make_pair(RateDeviceSuitability(device, extensions), device));
-        }
-
-        if (candidates.rbegin()->first > 0) {
-            return candidates.rbegin()->second;
-        } else {
-            THROW_EXCEPTION(SpockException, "Failed to find a suitable GPU!");
-        }
-    }
-
-    int LogicalDeviceFactoryImpl::RateDeviceSuitability(const PhysicalDevice& device, const std::vector<const char*>& extensions) const{
-        auto properties = device.FetchPhysicalDeviceProperties();
-        auto features = device.FetchPhysicalDeviceFeatures();
-
-        if (!device.AreAllExtensionsSupported(extensions)) {
-            return 0;
-        }
-
-        int score = 0;
-
-        //Dedicated GPU > integrated
-        if (properties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU) {
-            score += 1000;
-        }
-
-        //larger max texture size is better
-        score += properties.limits.maxImageDimension2D;
-        
-        LOG_INFO(std::string(properties.deviceName) + " Suitability Score: " + std::to_string(score));
-        return score;
     }
 
     QueueFamilyIndices LogicalDeviceFactoryImpl::DetermineQueueFamilyIndices(const PhysicalDevice device, const Surface* surface) const {

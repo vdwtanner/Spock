@@ -53,6 +53,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\SurfaceFactory.h">
       <Filter>Header</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\SwapChain.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\SwapChainFactory.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\PhysicalDeviceSelector.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\Loader.cpp">
@@ -80,6 +89,15 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\SurfaceFactory.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\SwapChain.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\SwapChainFactory.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\PhysicalDeviceSelector.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

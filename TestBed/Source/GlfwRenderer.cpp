@@ -1,9 +1,8 @@
 #include "GlfwRenderer.h"
 
-
-
 #include "Common/Version.h"
 #include "Common/Logger/Logger.h"
+#include "vkCore/PhysicalDeviceSelector.h"
 
 namespace Spock::Testbed
 {
@@ -33,8 +32,7 @@ namespace Spock::Testbed
 		params.hWnd = glfwGetWin32Window(window);
 		params.hInstance = GetModuleHandle(nullptr);
 		surface = surfaceFactory->CreateSurface(params);
-		device = logicalDeviceFactory->CreateLogicalVulkanDevice(*instance, deviceExtensions, surface.get());
+		auto deviceSelector = SwapChainSupportedSelector(surface.get());
+		device = logicalDeviceFactory->CreateLogicalVulkanDevice(*instance, deviceExtensions, deviceSelector, surface.get());
 	}
-
-
 }

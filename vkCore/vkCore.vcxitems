@@ -21,8 +21,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Include\vulkan_core.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Loader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\LogicalDeviceFactory.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\PhysicalDeviceSelector.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Surface.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\SurfaceFactory.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\SwapChain.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\SwapChainFactory.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanFunctions.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanInstance.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\VulkanInstanceFactory.h" />
@@ -32,8 +35,11 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\Loader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\LogicalDeviceFactory.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\PhysicalDeviceSelector.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\Surface.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\SurfaceFactory.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\SwapChain.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\SwapChainFactory.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanFunctions.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanInstance.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\VulkanInstanceFactory.cpp" />

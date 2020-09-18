@@ -67,8 +67,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\Functional\Concepts.h">
       <Filter>Header\Functional</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\vdwta\source\repos\Spock\Common\Common\Functional\Optional.h">
-      <Filter>Header\Functional</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Functional\Optional.h">
+      <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
