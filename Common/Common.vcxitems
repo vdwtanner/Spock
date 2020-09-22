@@ -15,6 +15,8 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+	<ClInclude Include="$(MSBuildThisFileDirectory)Common\Exceptions\SpockException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Exceptions\FileNotFoundException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\Functional\Concepts.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\Functional\Functional.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\Functional\Optional.h" />
@@ -22,17 +24,19 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\Logger\Logger.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\Logger\LoggerChain.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\Logger\VisualStudioLogger.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Common\SpockException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\StringUtils.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\Preconditions.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\Version.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\FileUtils.h" />
   </ItemGroup>
   <ItemGroup>
+	<ClCompile Include="$(MSBuildThisFileDirectory)Common\Exceptions\private\SpockException.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Common\Exceptions\private\FileNotFoundException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Common\Logger\private\CoutLogger.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Common\Logger\private\LoggerChain.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Common\Logger\private\LoggerProvider.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Common\Logger\private\VisualStudioLogger.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Common\private\SpockException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Common\private\StringUtils.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Common\private\FileUtils.cpp" />
   </ItemGroup>
 </Project>

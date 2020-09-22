@@ -16,7 +16,7 @@ namespace Spock::Common
 		static Optional<T> of(T value) requires NonPointerType<T> {
 			return Optional<T>(value);
 		}
-		static Optional<T> ofNullable(T* pValue) requires NonPointerType<T> {
+		static Optional<T> ofNullable(const T* pValue) requires NonPointerType<T> {
 			return pValue == nullptr ? Optional<T>() : Optional<T>(*pValue);
 		}
 

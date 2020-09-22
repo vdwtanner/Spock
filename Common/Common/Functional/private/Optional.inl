@@ -1,5 +1,5 @@
 //see..\Optional.h" for declaration
-#include "Common/SpockException.h"
+#include "Common/Exceptions/SpockException.h"
 
 namespace Spock::Common
 {

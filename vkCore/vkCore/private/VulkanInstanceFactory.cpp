@@ -1,7 +1,7 @@
 #include "vkCore/VulkanInstanceFactory.h"
 
 #include "vkCore/Consts.h"
-#include "Common/SpockException.h"
+#include "Common/Exceptions/SpockException.h"
 #include "vkCore/VulkanFunctions.h"
 
 #include "vkCore/Include/vulkan_core.h"

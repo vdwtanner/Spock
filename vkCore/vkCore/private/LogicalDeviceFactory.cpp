@@ -3,7 +3,7 @@
 #include <map>
 #include <set>
 
-#include "Common/SpockException.h"
+#include "Common/Exceptions/SpockException.h"
 #include "Common/Logger/Logger.h"
 #include "Common/Functional/Optional.h"
 

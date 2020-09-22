@@ -15,44 +15,47 @@
     <Filter Include="Source\Functional">
       <UniqueIdentifier>{133b7672-47cf-4d67-9876-a5b130b6546c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header\Exceptions">
+      <UniqueIdentifier>{810fcea4-4c89-4dfe-9517-050586c8017a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Logger">
+      <UniqueIdentifier>{2a636cc8-8652-4f47-87db-ba99ff3c5070}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Exceptions">
+      <UniqueIdentifier>{b5915f8f-185c-4be8-b8a6-fa12a0d84a0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Logger">
+      <UniqueIdentifier>{fdd72ad5-617e-435f-a563-0819223ce66b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Common\Logger\private\LoggerProvider.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Common\private\StringUtils.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Common\Logger\private\VisualStudioLogger.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Common\Logger\private\LoggerChain.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Common\private\SpockException.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)Common\private\FileUtils.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Common\Logger\private\CoutLogger.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\Logger</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Common\Logger\private\LoggerChain.cpp">
+      <Filter>Source\Logger</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Common\Logger\private\LoggerProvider.cpp">
+      <Filter>Source\Logger</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Common\Logger\private\VisualStudioLogger.cpp">
+      <Filter>Source\Logger</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Common\Exceptions\private\FileNotFoundException.cpp">
+      <Filter>Source\Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Common\Exceptions\private\SpockException.cpp">
+      <Filter>Source\Exceptions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Logger\Logger.h">
-      <Filter>Header</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\StringUtils.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Logger\VisualStudioLogger.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Logger\LoggerChain.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Common\SpockException.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Logger\CoutLogger.h">
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\Preconditions.h">
@@ -69,6 +72,27 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\Functional\Optional.h">
       <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\FileUtils.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Logger\CoutLogger.h">
+      <Filter>Header\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Logger\Logger.h">
+      <Filter>Header\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Logger\LoggerChain.h">
+      <Filter>Header\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Logger\VisualStudioLogger.h">
+      <Filter>Header\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Exceptions\FileNotFoundException.h">
+      <Filter>Header\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Exceptions\SpockException.h">
+      <Filter>Header\Exceptions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

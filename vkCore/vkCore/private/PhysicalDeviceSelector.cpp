@@ -2,7 +2,7 @@
 
 #include <map>
 #include "vkCore/VulkanFunctions.h"
-#include "Common/SpockException.h"
+#include "Common/Exceptions/SpockException.h"
 #include "Common/Logger/Logger.h"
 
 namespace Spock::vkCore

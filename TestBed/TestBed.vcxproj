@@ -167,6 +167,8 @@
     <ClInclude Include="Source\TestApplication.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Shaders\triangle.frag" />
+    <None Include="Resources\Shaders\triangle.vert" />
     <None Include="vcpkg.json" />
   </ItemGroup>
   <ItemGroup>

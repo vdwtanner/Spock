@@ -12,7 +12,7 @@
 
 #include <string>
 #include <memory>
-#include "Common/SpockException.h"
+#include "Common/Exceptions/SpockException.h"
 
 namespace Spock::Common
 {

@@ -1,6 +1,6 @@
 #include "../SurfaceFactory.h"
 
-#include "Common/SpockException.h"
+#include "Common/Exceptions/SpockException.h"
 
 namespace Spock::vkCore
 {

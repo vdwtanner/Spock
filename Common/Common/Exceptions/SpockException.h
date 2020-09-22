@@ -2,8 +2,8 @@
 
 #include <string>
 #include <memory>
-#include "Preconditions.h"
-#include "StringUtils.h"
+#include "Common/Preconditions.h"
+#include "Common/StringUtils.h"
 
 namespace Spock::Common
 {
@@ -15,10 +15,13 @@ namespace Spock::Common
 		~SpockException() = default;
 
 		std::string GenerateErrorReport() const;
-	private:
+	protected:
+		SpockException(std::string fileName, int lineNumber, std::string what, std::string name, const SpockException* cause = nullptr);
+
 		const std::string fileName;
 		const int lineNumber;
 		const SpockException* cause;
+		const std::string name;
 
 		virtual std::string InternalGenerateErrorReport() const;
 	};

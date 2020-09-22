@@ -10,7 +10,7 @@
 #include "vkCore/Loader.h"
 #include "Common/Logger/Logger.h"
 #include "Common/StringUtils.h"
-#include "Common/SpockException.h"
+#include "Common/Exceptions/SpockException.h"
 #include "vkCore/VulkanFunctions.h"
 
 namespace Spock::vkCore

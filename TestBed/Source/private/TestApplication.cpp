@@ -8,7 +8,7 @@
 #include <iostream>
 #include <exception>
 
-#include "Common/SpockException.h"
+#include "Common/Exceptions/SpockException.h"
 #include "Common/Logger/LoggerChain.h"
 #include "Common/Logger/VisualStudioLogger.h"
 #include "Common/Logger/CoutLogger.h"
