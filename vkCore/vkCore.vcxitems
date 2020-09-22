@@ -22,6 +22,13 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Loader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\LogicalDeviceFactory.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\PhysicalDeviceSelector.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\Pipeline.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\PipelineBuilder.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\RenderPass.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\RenderPassBuilder.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\ShaderModule.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\ShaderModuleFactory.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\SubPassBuilder.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Surface.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\SurfaceFactory.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\SwapChain.h" />
@@ -33,6 +40,13 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\PhysicalDevice.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\private\Pipeline.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\private\PipelineBuilder.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\private\RenderPass.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\private\RenderPassBuilder.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\private\ShaderModule.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\private\ShaderModuleFactory.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\private\SubPassBuilder.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\Loader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\LogicalDeviceFactory.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\PhysicalDeviceSelector.cpp" />

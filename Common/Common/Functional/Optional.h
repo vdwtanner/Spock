@@ -56,6 +56,12 @@ namespace Spock::Common
 		template<typename ObjectRef, typename Functor>
 		const void Apply(ObjectRef ref, Functor function) const;
 
+		template<typename Functor>
+		const void IfEmpty(Functor function) const;
+
+		template<typename ObjectRef, typename Functor>
+		const void IfEmpty(ObjectRef ref, Functor function) const;
+
 		template<typename Result, typename Functor>
 		requires Returns<T, Functor, Result>
 			const Optional<Result> Map(Functor function) const;

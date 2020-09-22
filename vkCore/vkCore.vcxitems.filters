@@ -12,6 +12,12 @@
       <UniqueIdentifier>{d063352e-6188-4701-ac26-2c2953028177}</UniqueIdentifier>
       <Extensions>h</Extensions>
     </Filter>
+    <Filter Include="Header\Pipeline">
+      <UniqueIdentifier>{4e404139-9b57-4b50-8e03-fddb113001cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Pipeline">
+      <UniqueIdentifier>{a75a8453-cd02-4eba-86ea-872a84c10b70}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Include\vulkan_core.h">
@@ -62,6 +68,27 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\PhysicalDeviceSelector.h">
       <Filter>Header</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\RenderPass.h">
+      <Filter>Header\Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\PipelineBuilder.h">
+      <Filter>Header\Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\RenderPassBuilder.h">
+      <Filter>Header\Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\ShaderModule.h">
+      <Filter>Header\Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\ShaderModuleFactory.h">
+      <Filter>Header\Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\SubPassBuilder.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\Pipeline.h">
+      <Filter>Header\Pipeline</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\Loader.cpp">
@@ -99,6 +126,27 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\PhysicalDeviceSelector.cpp">
       <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\private\PipelineBuilder.cpp">
+      <Filter>Source\Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\private\RenderPass.cpp">
+      <Filter>Source\Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\private\RenderPassBuilder.cpp">
+      <Filter>Source\Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\private\ShaderModule.cpp">
+      <Filter>Source\Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\private\ShaderModuleFactory.cpp">
+      <Filter>Source\Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\private\SubPassBuilder.cpp">
+      <Filter>Source\Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\private\Pipeline.cpp">
+      <Filter>Source\Pipeline</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

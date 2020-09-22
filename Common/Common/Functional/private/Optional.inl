@@ -1,5 +1,6 @@
 //see..\Optional.h" for declaration
 #include "Common/Exceptions/SpockException.h"
+#include "..\Optional.h"
 
 namespace Spock::Common
 {
@@ -50,6 +51,22 @@ namespace Spock::Common
 	const void Optional<T>::Apply(ObjectRef ref, Functor function) const {
 		if (present) {
 			(ref->*function)(value);
+		}
+	}
+
+	template<typename T>
+	template<typename Functor>
+	inline const void Optional<T>::IfEmpty(Functor function) const {
+		if (!present) {
+			function();
+		}
+	}
+
+	template<typename T>
+	template<typename ObjectRef, typename Functor>
+	inline const void Optional<T>::IfEmpty(ObjectRef ref, Functor function) const {
+		if (!present) {
+			(ref->*function)();
 		}
 	}
 
