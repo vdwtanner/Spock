@@ -16,6 +16,14 @@ namespace Spock::vkCore
 		imageViews(CreateImageViews()) {
 	}
 
+	const VkFormat SwapChain::GetFormat() const {
+		return format;
+	}
+
+	const VkExtent2D SwapChain::GetExtent() const {
+		return extent;
+	}
+
 	SwapChain::~SwapChain() {
 		for (auto& imageView : imageViews) {
 			vkDestroyImageView(logicalDevice->GetVkDeviceHandle(), imageView, nullptr);

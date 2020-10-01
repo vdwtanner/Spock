@@ -15,7 +15,7 @@ namespace Spock::vkCore
 		RenderPassBuilder* AddColorAttachmentDefault(VkFormat format);
 		RenderPassBuilder* AddSubpass(VkSubpassDescription subpass);
 		RenderPassBuilder* AddSubpassDependency(VkSubpassDependency subpassDependency);
-		std::unique_ptr<RenderPass> Build(const std::shared_ptr<LogicalDevice> device) const;
+		std::shared_ptr<RenderPass> Build(const std::shared_ptr<LogicalDevice> device) const;
 	private:
 		std::vector<VkAttachmentDescription> colorAttachements;
 		std::vector<VkSubpassDescription> subpasses;

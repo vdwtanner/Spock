@@ -14,6 +14,7 @@ namespace Spock::vkCore
 		ShaderModule(std::shared_ptr<LogicalDevice> device, VkShaderModule moduleHandle, std::string entryPointName = "main");
 		~ShaderModule();
 		const std::string GetEntryPointName() const;
+		const char* GetEntryPointNameData() const;
 		const VkShaderModule GetShaderModuleHandle() const;
 	private:
 		std::shared_ptr<LogicalDevice> device;

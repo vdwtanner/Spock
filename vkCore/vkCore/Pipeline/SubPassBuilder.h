@@ -13,7 +13,7 @@ namespace Spock::vkCore
 	public:
 		SubPassBuilder* Flags(VkSubpassDescriptionFlags flags);
 		SubPassBuilder* AddInputAttachment(VkAttachmentReference inputAttachment);
-		SubPassBuilder* AddOutputAttachment(VkAttachmentReference colorAttachment);
+		SubPassBuilder* AddColorAttachment(VkAttachmentReference colorAttachment);
 		VkSubpassDescription Build();
 	private:
 		Common::Optional<VkSubpassDescriptionFlags> flags;

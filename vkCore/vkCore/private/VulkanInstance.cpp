@@ -8,10 +8,14 @@ namespace Spock::vkCore
 {
 	using namespace Common;
 
-	VulkanInstance::VulkanInstance(VkInstance handle) : vkInstanceHandle(handle) {
+	VulkanInstance::VulkanInstance(VkInstance handle, VkDebugUtilsMessengerEXT debugMessengerHandle) 
+		: vkInstanceHandle(handle), vkDebugMessengerHandle(debugMessengerHandle) {
 	}
 
 	VulkanInstance::~VulkanInstance() {
+		if (vkDebugMessengerHandle != VK_NULL_HANDLE) {
+			vkDestroyDebugUtilsMessengerEXT(vkInstanceHandle, vkDebugMessengerHandle, nullptr);
+		}
 		vkDestroyInstance(vkInstanceHandle, nullptr);
 	}
 

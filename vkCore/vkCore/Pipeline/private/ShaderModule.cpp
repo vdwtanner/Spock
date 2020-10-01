@@ -12,6 +12,10 @@ const std::string Spock::vkCore::ShaderModule::GetEntryPointName() const {
 	return entryPointName;
 }
 
+const char* Spock::vkCore::ShaderModule::GetEntryPointNameData() const {
+	return entryPointName.data();
+}
+
 const VkShaderModule Spock::vkCore::ShaderModule::GetShaderModuleHandle() const {
 	return vkShaderModuleHandle;
 }

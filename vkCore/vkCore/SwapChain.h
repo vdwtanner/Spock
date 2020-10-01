@@ -12,6 +12,8 @@ namespace Spock::vkCore
 	{
 	public:
 		SwapChain(const VkSwapchainKHR handle, const std::shared_ptr<LogicalDevice> logicalDevice, const VkFormat format, const VkExtent2D extent);
+		const VkFormat GetFormat() const;
+		const VkExtent2D GetExtent() const;
 		~SwapChain();
 	private:
 		const VkSwapchainKHR vkSwapChainHandle;

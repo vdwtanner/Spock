@@ -5,6 +5,8 @@
 #include "vkCore/VulkanFunctions.h"
 
 #include "vkCore/Include/vulkan_core.h"
+#include "Common/Logger/Logger.h"
+#include "vkCore/DebugMessenger.h"
 
 namespace Spock::vkCore
 {
@@ -18,14 +20,46 @@ namespace Spock::vkCore
 		if (!loader->AreAllExtensionsAvailable(requiredExtensions)) {
 			THROW_EXCEPTION(SpockException, "Not all required extensions are available. Check the log for more details.");
 		}
+		if (ENABLE_VALIDATION_LAYERS && !CheckValidationLayerSupport()) {
+			THROW_EXCEPTION(SpockException, "Not all validation layers are supported! Check the log for details.");
+		}
 		VkApplicationInfo appInfo = MakeAppInfo(appName, appVersion);
-		auto layers = std::vector<const char*>();
-		VkInstanceCreateInfo createInfo = MakeVkInstanceCreateInfo(&appInfo, layers, requiredExtensions);
+		auto layers = ENABLE_VALIDATION_LAYERS ? validationLayers : std::vector<const char*>();
+		auto extensions = GetExtensions();
+		VkInstanceCreateInfo createInfo = MakeVkInstanceCreateInfo(&appInfo, layers, extensions);
 		VkInstance vkInstance = MakeVkInstance(&createInfo);
-		auto instance = std::make_unique<VulkanInstance>(vkInstance);
-		loader->LoadInstanceLevelFunctions(instance.get());
-		loader->LoadInstanceLevelFunctionsFromExtensions(instance.get());
+		loader->LoadInstanceLevelFunctions(vkInstance);
+		loader->LoadInstanceLevelFunctionsFromExtensions(vkInstance);
+		auto vkDebugMessengerHandle = MakeVkDebugUtilsMessenger(vkInstance);
+		auto instance = std::make_unique<VulkanInstance>(vkInstance, vkDebugMessengerHandle);
+		
 		return instance;
+	}
+
+	bool VulkanInstanceFactoryImpl::CheckValidationLayerSupport() {
+		uint32_t layerCount;
+		vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
+
+		std::vector<VkLayerProperties> availableLayers(layerCount);
+		vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
+
+		for (const char* layerName : validationLayers) {
+			bool layerFound = false;
+
+			for (const auto& layerProperties : availableLayers) {
+				if (strcmp(layerName, layerProperties.layerName) == 0) {
+					layerFound = true;
+					break;
+				}
+			}
+
+			if (!layerFound) {
+				LOG_ERROR("Validation Layer \"" + std::string(layerName) + "\" is not supported!");
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	VkApplicationInfo VulkanInstanceFactoryImpl::MakeAppInfo(const std::string& appName, const Version& appVersion) {
@@ -44,7 +78,19 @@ namespace Spock::vkCore
 		return VK_MAKE_VERSION(version.major, version.minor, version.patch);
 	}
 
-	VkInstanceCreateInfo VulkanInstanceFactoryImpl::MakeVkInstanceCreateInfo(const VkApplicationInfo* appInfo, const std::vector<const char*>& layers, const std::vector<const char*>& availableExtensions) {
+	std::vector<const char*> VulkanInstanceFactoryImpl::GetExtensions() {
+		auto extensions = std::vector<const char*>(requiredExtensions);
+		if (ENABLE_VALIDATION_LAYERS) {
+			extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
+		}
+		return extensions;
+	}
+
+	VkInstanceCreateInfo VulkanInstanceFactoryImpl::MakeVkInstanceCreateInfo(
+		const VkApplicationInfo* appInfo, 
+		const std::vector<const char*>& layers,
+		const std::vector<const char*>& availableExtensions
+	) {
 		return {
 			VkStructureType::VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
 			nullptr,
@@ -65,5 +111,27 @@ namespace Spock::vkCore
 			THROW_EXCEPTION(SpockException, "Failed to create Vulkan Instance. Result: " + result);
 		}
 		return instance;
+	}
+	VkDebugUtilsMessengerEXT VulkanInstanceFactoryImpl::MakeVkDebugUtilsMessenger(const VkInstance instance) {
+		if (!ENABLE_VALIDATION_LAYERS) {
+			return VK_NULL_HANDLE;
+		}
+
+		VkDebugUtilsMessengerCreateInfoEXT createInfo{};
+		createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
+		createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT |
+			VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT |
+			VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT |
+			VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
+		createInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT |
+			VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT |
+			VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
+		createInfo.pfnUserCallback = Debug::vulkanDebugCallback;
+		createInfo.pUserData = nullptr;
+
+		VkDebugUtilsMessengerEXT debugMessengerHandle;
+		VK_CALL(vkCreateDebugUtilsMessengerEXT(instance, &createInfo, nullptr, &debugMessengerHandle), "Failed to create Debug Messenger");
+		
+		return debugMessengerHandle;
 	}
 }

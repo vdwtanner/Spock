@@ -39,6 +39,19 @@ namespace Spock::Common
 	}
 
 	template<typename T>
+	inline const T& Optional<T>::GetRefOr(T& other) const {
+		return present ? value : other;
+	}
+
+	template<typename T>
+	inline const T& Optional<T>::GetRef() const {
+		if (!present) {
+			THROW_EXCEPTION(SpockException, "Get() called when no value present!");
+		}
+		return value;
+	}
+
+	template<typename T>
 	template<typename Functor>
 	const void Optional<T>::Apply(Functor function) const {
 		if (present) {

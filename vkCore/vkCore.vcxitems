@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Consts.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\DebugMessenger.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Include\vk_platform.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Include\vulkan.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Include\vulkan_core.h" />
@@ -47,6 +48,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\private\ShaderModule.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\private\ShaderModuleFactory.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\private\SubPassBuilder.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\DebugMessenger.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\Loader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\LogicalDeviceFactory.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\PhysicalDeviceSelector.cpp" />

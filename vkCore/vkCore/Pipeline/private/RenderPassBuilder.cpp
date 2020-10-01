@@ -25,10 +25,11 @@ namespace Spock::vkCore
     }
 
     RenderPassBuilder* RenderPassBuilder::AddSubpassDependency(VkSubpassDependency subpassDependency) {
-        return nullptr;
+        subpassDependencies.push_back(subpassDependency);
+        return this;
     }
 
-    std::unique_ptr<RenderPass> RenderPassBuilder::Build(const std::shared_ptr<LogicalDevice> device) const {
+    std::shared_ptr<RenderPass> RenderPassBuilder::Build(const std::shared_ptr<LogicalDevice> device) const {
         VkRenderPassCreateInfo createInfo{};
         createInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
         createInfo.attachmentCount = (uint32_t)colorAttachements.size();
@@ -44,6 +45,6 @@ namespace Spock::vkCore
             THROW_EXCEPTION(SpockException, "Failed to create RenderPass with error code: " + std::to_string(result));
         }
 
-        return std::make_unique<RenderPass>(device, renderPassHandle);
+        return std::make_shared<RenderPass>(device, renderPassHandle);
     }
 }

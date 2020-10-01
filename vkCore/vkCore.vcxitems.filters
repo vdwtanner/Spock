@@ -18,6 +18,9 @@
     <Filter Include="Source\Pipeline">
       <UniqueIdentifier>{a75a8453-cd02-4eba-86ea-872a84c10b70}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header\Buffers">
+      <UniqueIdentifier>{8ea883e5-b464-47e8-a443-ca57ad25c197}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Include\vulkan_core.h">
@@ -89,6 +92,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\Pipeline.h">
       <Filter>Header\Pipeline</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)vkCore\DebugMessenger.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\Loader.cpp">
@@ -147,6 +153,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\Pipeline\private\Pipeline.cpp">
       <Filter>Source\Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)vkCore\private\DebugMessenger.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

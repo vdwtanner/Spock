@@ -15,7 +15,7 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
-	<ClInclude Include="$(MSBuildThisFileDirectory)Common\Exceptions\SpockException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Common\Exceptions\SpockException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\Exceptions\FileNotFoundException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\Functional\Concepts.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\Functional\Functional.h" />
@@ -30,7 +30,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Common\FileUtils.h" />
   </ItemGroup>
   <ItemGroup>
-	<ClCompile Include="$(MSBuildThisFileDirectory)Common\Exceptions\private\SpockException.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Common\Exceptions\private\SpockException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Common\Exceptions\private\FileNotFoundException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Common\Logger\private\CoutLogger.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Common\Logger\private\LoggerChain.cpp" />

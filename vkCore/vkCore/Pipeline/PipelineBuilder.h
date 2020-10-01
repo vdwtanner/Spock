@@ -18,6 +18,8 @@ namespace Spock::vkCore
 		PipelineBuilder* VertexInputState(const VkPipelineVertexInputStateCreateInfo vertexInputState);
 		PipelineBuilder* Topology(const VkPrimitiveTopology topology, const bool enablePrimitiveRestart);
 		PipelineBuilder* Viewport(float x, float y, float width, float height);
+		PipelineBuilder* Viewport(float x, float y, VkExtent2D extent);
+		PipelineBuilder* Viewport(VkRect2D rect);
 		PipelineBuilder* Scissor(int32_t offsetX, int32_t offsetY, VkExtent2D extent);
 		PipelineBuilder* Rasterizer(VkPipelineRasterizationStateCreateInfo rasterizer);
 		PipelineBuilder* RasterizerDefault();
@@ -63,11 +65,11 @@ namespace Spock::vkCore
 		uint32_t subpassIndex;
 
 		void Validate();
-		VkPipelineCreateFlags MakeFlags();
-		VkPipelineViewportStateCreateInfo MakeViewportState();
-		VkPipelineColorBlendStateCreateInfo MakeColorBlendInfo();
 		VkPipelineLayout MakePipelineLayout(std::shared_ptr<LogicalDevice> device);
 		std::vector<VkPipelineShaderStageCreateInfo> MakeShaderStages(std::shared_ptr<LogicalDevice> device);
 		VkPipelineShaderStageCreateInfo MakeShaderStage(VkShaderStageFlagBits stage, std::shared_ptr<ShaderModule> shaderModule) const;
+		VkPipelineCreateFlags MakeFlags();
+		VkPipelineViewportStateCreateInfo MakeViewportState();
+		VkPipelineColorBlendStateCreateInfo MakeColorBlendInfo();
 	};
 }

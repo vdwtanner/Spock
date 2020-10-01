@@ -6,7 +6,7 @@
 namespace Spock::vkCore
 {
 	using namespace Common;
-	std::shared_ptr<ShaderModule> Spock::vkCore::ShaderModuleFactory::CreateShaderModule(
+	std::shared_ptr<ShaderModule> Spock::vkCore::ShaderModuleFactoryImpl::CreateShaderModule(
 		const std::shared_ptr<LogicalDevice> device,
 		const std::filesystem::path& pathToShader,
 		const std::string entryPointName
@@ -15,7 +15,7 @@ namespace Spock::vkCore
 		return CreateShaderModule(device, data, entryPointName);
 	}
 
-	std::shared_ptr<ShaderModule> ShaderModuleFactory::CreateShaderModule(
+	std::shared_ptr<ShaderModule> ShaderModuleFactoryImpl::CreateShaderModule(
 		const std::shared_ptr<LogicalDevice> device, 
 		const std::vector<char> shaderBytes,
 		const std::string entryPointName
@@ -24,7 +24,7 @@ namespace Spock::vkCore
 		return std::make_shared<ShaderModule>(device, vkShaderModule, entryPointName);
 	}
 
-	VkShaderModule ShaderModuleFactory::MakeVkShaderModule(const VkDevice deviceHandle, std::vector<char> shaderBytes) {
+	VkShaderModule ShaderModuleFactoryImpl::MakeVkShaderModule(const VkDevice deviceHandle, std::vector<char> shaderBytes) {
 		VkShaderModuleCreateInfo createInfo{};
 		createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
 		createInfo.pCode = reinterpret_cast<const uint32_t*>(shaderBytes.data());

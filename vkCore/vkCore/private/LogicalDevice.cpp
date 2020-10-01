@@ -23,6 +23,7 @@ namespace Spock::vkCore
 	LogicalDevice::~LogicalDevice() {
 		vkDestroyDevice(vkDeviceHandle, nullptr);
 	}
+
 	const void LogicalDevice::InitPostFunctionLoad() {
 		queueFamilyIndices.graphicsFamily.Apply([&](uint32_t q) { vkGetDeviceQueue(vkDeviceHandle, q, 0, &graphicsQueue); });
 		queueFamilyIndices.presentFamily.Apply([&](uint32_t q) { vkGetDeviceQueue(vkDeviceHandle, q, 0, &presentQueue); });

@@ -19,6 +19,14 @@ namespace Spock::vkCore
         return this;
     }
 
+    PipelineBuilder* PipelineBuilder::Viewport(float x, float y, VkExtent2D extent) {
+        return Viewport(x,y, static_cast<float>(extent.width), static_cast<float>(extent.height));
+    }
+
+    PipelineBuilder* PipelineBuilder::Viewport(VkRect2D rect) {
+        return Viewport(static_cast<float>(rect.offset.x), static_cast<float>(rect.offset.y), static_cast<float>(rect.extent.width), static_cast<float>(rect.extent.height));
+    }
+
     PipelineBuilder* PipelineBuilder::Scissor(int32_t offsetX, int32_t offsetY, VkExtent2D extent) {
         VkRect2D scissor{};
         scissor.offset = { offsetX, offsetY };
@@ -170,11 +178,11 @@ namespace Spock::vkCore
         createInfo.flags = flags;
         createInfo.stageCount = (uint32_t)shaderStages.size();
         createInfo.pStages = shaderStages.size() > 0 ? shaderStages.data() : nullptr;
-        createInfo.pVertexInputState = &(vertexInputState.Get());
-        createInfo.pInputAssemblyState = &(inputAssemblyState.Get());
+        createInfo.pVertexInputState = &vertexInputState.GetRef();
+        createInfo.pInputAssemblyState = &inputAssemblyState.GetRef();
         createInfo.pViewportState = &viewportState;
-        createInfo.pRasterizationState = &(rasterizer.Get());
-        createInfo.pMultisampleState = &(multisampling.Get());
+        createInfo.pRasterizationState = &rasterizer.GetRef();
+        createInfo.pMultisampleState = &multisampling.GetRef();
         createInfo.pDepthStencilState = nullptr; // Optional
         createInfo.pColorBlendState = &colorBlendInfo;
         createInfo.pDynamicState = nullptr; // Optional
@@ -183,7 +191,7 @@ namespace Spock::vkCore
         createInfo.subpass = subpassIndex;
 
         basePipelineHandle.Apply([&createInfo](auto base) {createInfo.basePipelineHandle = base; });
-        basePipelineIndex.Apply([&createInfo](auto base) {createInfo.basePipelineIndex = base; });
+        createInfo.basePipelineIndex = basePipelineIndex.GetOr(-1);
         
         VkPipeline pipeline;
         auto result = vkCreateGraphicsPipelines(device->GetVkDeviceHandle(), VK_NULL_HANDLE, 1, &createInfo, nullptr, &pipeline);
@@ -204,33 +212,6 @@ namespace Spock::vkCore
         multisampling.IfEmpty(assert);
         colorBlendAttachment.IfEmpty(assert);
         ASSERT_USAGE(renderPass.get() != nullptr, "Required value renderPass was null");
-    }
-
-    VkPipelineCreateFlags PipelineBuilder::MakeFlags() {
-        VkPipelineCreateFlags flags = 0;
-        if (basePipelineHandle.IsPresent() || basePipelineIndex.IsPresent()) {
-            flags |= VkPipelineCreateFlagBits::VK_PIPELINE_CREATE_DERIVATIVE_BIT;
-        }
-        return VkPipelineCreateFlags();
-    }
-
-    VkPipelineViewportStateCreateInfo PipelineBuilder::MakeViewportState() {
-        VkPipelineViewportStateCreateInfo viewportState{};
-        viewportState.sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
-        viewportState.viewportCount = 1;
-        viewportState.pViewports = &(viewport.Get());
-        viewportState.scissorCount = 1;
-        viewportState.pScissors = &(scissor.Get());
-        return viewportState;
-    }
-
-    VkPipelineColorBlendStateCreateInfo PipelineBuilder::MakeColorBlendInfo() {
-        VkPipelineColorBlendStateCreateInfo colorBlending{};
-        colorBlending.sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
-        colorBlending.logicOpEnable = VK_FALSE;
-        colorBlending.attachmentCount = 1;
-        colorBlending.pAttachments = &(colorBlendAttachment.Get());
-        return colorBlending;
     }
 
     VkPipelineLayout PipelineBuilder::MakePipelineLayout(std::shared_ptr<LogicalDevice> device) {
@@ -269,13 +250,39 @@ namespace Spock::vkCore
     VkPipelineShaderStageCreateInfo PipelineBuilder::MakeShaderStage(
         VkShaderStageFlagBits stage,
         std::shared_ptr<ShaderModule> shaderModule
-    ) const{
+    ) const {
         VkPipelineShaderStageCreateInfo createInfo{};
         createInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
         createInfo.stage = stage;
         createInfo.module = shaderModule->GetShaderModuleHandle();
-        createInfo.pName = shaderModule->GetEntryPointName().data();
+        createInfo.pName = shaderModule->GetEntryPointNameData();
         return createInfo;
     }
 
+    VkPipelineCreateFlags PipelineBuilder::MakeFlags() {
+        VkPipelineCreateFlags flags = 0;
+        if (basePipelineHandle.IsPresent() || basePipelineIndex.IsPresent()) {
+            flags |= VkPipelineCreateFlagBits::VK_PIPELINE_CREATE_DERIVATIVE_BIT;
+        }
+        return flags;
+    }
+
+    VkPipelineViewportStateCreateInfo PipelineBuilder::MakeViewportState() {
+        VkPipelineViewportStateCreateInfo viewportState{};
+        viewportState.sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
+        viewportState.viewportCount = 1;
+        viewportState.pViewports = &viewport.GetRef();
+        viewportState.scissorCount = 1;
+        viewportState.pScissors = &scissor.GetRef();
+        return viewportState;
+    }
+
+    VkPipelineColorBlendStateCreateInfo PipelineBuilder::MakeColorBlendInfo() {
+        VkPipelineColorBlendStateCreateInfo colorBlending{};
+        colorBlending.sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
+        colorBlending.logicOpEnable = VK_FALSE;
+        colorBlending.attachmentCount = 1;
+        colorBlending.pAttachments = &colorBlendAttachment.GetRef();
+        return colorBlending;
+    }
 }

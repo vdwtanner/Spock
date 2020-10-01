@@ -20,8 +20,10 @@ namespace Spock::Common
 			return pValue == nullptr ? Optional<T>() : Optional<T>(*pValue);
 		}
 
+		Optional<T>() : present(false), value() {}
 		Optional<T>(const Optional<T>& other) = default;
 		Optional<T>(Optional<T>&& other) = default;
+
 		const void operator=(const Optional<T>& rhs);
 		const void operator=(const T& rhs);
 		Optional<T>& operator=(Optional<T>&& rhs) = default;
@@ -47,8 +49,11 @@ namespace Spock::Common
 
 		const bool IsPresent() const;
 		const bool IsEmpty() const;
+		
 		const T GetOr(T other) const;
 		const T Get() const;
+		const T& GetRefOr(T& other) const;
+		const T& GetRef() const;
 
 		template<typename Functor>
 		const void Apply(Functor function) const;
@@ -73,7 +78,6 @@ namespace Spock::Common
 		T value;
 		bool present;
 
-		Optional<T>() : present(false), value() {}
 		Optional<T>(T value) : value(value), present(true) {}
 		Optional<T>(T value, bool present) : value(value), present(present) {}
 	};

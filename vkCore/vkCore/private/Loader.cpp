@@ -94,12 +94,11 @@ namespace Spock::vkCore
 		loadStateBitmask |= DISCOVERED_AVAILABLE_EXTENSIONS;
 	}
 
-	void LoaderImpl::LoadInstanceLevelFunctions(const VulkanInstance* instance) {
+	void LoaderImpl::LoadInstanceLevelFunctions(const VkInstance instance) {
 		ASSERT_USAGE((loadStateBitmask & GLOBAL_FUNCTIONS_LOADED) > 0, "Must call GLOBAL_FUNCTIONS_LOADED() before LoadInstanceLevelFunctions().");
 		LOG_INFO("\nLoading INSTANCE_LEVEL_VULKAN_FUNCTIONS...");
-		auto handle = instance->GetVkInstanceHandle();
 		#define INSTANCE_LEVEL_VULKAN_FUNCTION(name)										\
-		name = (PFN_##name)vkGetInstanceProcAddr(handle, #name);							\
+		name = (PFN_##name)vkGetInstanceProcAddr(instance, #name);							\
 		if (name == nullptr) {																\
 			THROW_EXCEPTION(SpockException, "Could not load instance-level Vulkan function named: " #name);\
 		} else {																			\
@@ -109,10 +108,9 @@ namespace Spock::vkCore
 		#include "vkCore/ListOfVulkanFunctions.inl"
 	}
 
-	void LoaderImpl::LoadInstanceLevelFunctionsFromExtensions(const VulkanInstance* instance) {
+	void LoaderImpl::LoadInstanceLevelFunctionsFromExtensions(const VkInstance instance) {
 		ASSERT_USAGE((loadStateBitmask & GLOBAL_FUNCTIONS_LOADED) > 0, "Must call GLOBAL_FUNCTIONS_LOADED() before LoadInstanceLevelFunctionsFromExtensions().");
 		LOG_INFO("\nLoading INSTANCE_LEVEL_VULKAN_FUNCTIONS_FROM_EXTENSIONS...");
-		auto handle = instance->GetVkInstanceHandle();
 		bool extensionAvailable;
 		
 		#define INSTANCE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION(name, extension)				\
@@ -120,7 +118,7 @@ namespace Spock::vkCore
 		for (auto& availableExtension : availableExtensions) {								\
 			if (std::string(availableExtension.extensionName) == std::string(extension)) {	\
 				extensionAvailable = true;													\
-				name = (PFN_##name)vkGetInstanceProcAddr(handle, #name);					\
+				name = (PFN_##name)vkGetInstanceProcAddr(instance, #name);					\
 				if (name == nullptr) {														\
 					THROW_EXCEPTION(SpockException, "Could not load instance-level Vulkan function named '" #name "' from extension '" #extension);\
 				} else {																	\
