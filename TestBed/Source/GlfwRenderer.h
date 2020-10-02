@@ -18,7 +18,9 @@ namespace Spock::Testbed
 	{
 	public:
 		GlfwRenderer(std::shared_ptr<vkCore::Loader> loader, GLFWwindow* window);
+		~GlfwRenderer();
 		const void Init();
+		void RenderFrame();
 	private:
 		const std::string VERT_SHADER_PATH = "Resources/Shaders/Compiled/triangle.vert.spv";
 		const std::string FRAG_SHADER_PATH = "Resources/Shaders/Compiled/triangle.frag.spv";
@@ -34,9 +36,21 @@ namespace Spock::Testbed
 		std::unique_ptr<vkCore::Surface> surface;
 		std::shared_ptr<vkCore::LogicalDevice> device;
 		std::unique_ptr<vkCore::SwapChain> swapChain;
+		std::shared_ptr<vkCore::RenderPass> renderPass;
+		std::unique_ptr<vkCore::Pipeline> pipeline;
+		std::vector<VkFramebuffer> frameBuffers;
+		VkCommandPool commandPool;
+		std::vector<VkCommandBuffer> commandBuffers;
 
-		std::unique_ptr<vkCore::Pipeline> CreatePipeline();
-		std::shared_ptr<vkCore::RenderPass> CreateRenderPass();
+		void CreateSurface();
+		void CreateDevice();
+		void CreateSwapChain();
+		void CreateRenderPass();
+		void CreatePipeline();
+		void CreateFrameBuffers();
+		void CreateCommandPool();
+		void CreateCommandBuffers();
+		void RecordCommands();
 	};
 }
 

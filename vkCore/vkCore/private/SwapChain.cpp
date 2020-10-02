@@ -24,6 +24,14 @@ namespace Spock::vkCore
 		return extent;
 	}
 
+	const int SwapChain::GetNumImageViews() const {
+		return static_cast<int>(imageViews.size());
+	}
+
+	const VkImageView& SwapChain::GetImageView(int x) const {
+		return imageViews[x];
+	}
+
 	SwapChain::~SwapChain() {
 		for (auto& imageView : imageViews) {
 			vkDestroyImageView(logicalDevice->GetVkDeviceHandle(), imageView, nullptr);

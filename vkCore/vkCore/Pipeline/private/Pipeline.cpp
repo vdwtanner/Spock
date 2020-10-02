@@ -10,4 +10,12 @@ namespace Spock::vkCore
 		vkDestroyPipeline(device->GetVkDeviceHandle(), vkPipelineHandle, nullptr);
 		vkDestroyPipelineLayout(device->GetVkDeviceHandle(), vkPipelineLayoutHandle, nullptr);
 	}
+
+	const VkPipelineLayout Pipeline::GetLayoutHandle() const {
+		return vkPipelineLayoutHandle;
+	}
+
+	const VkPipeline Pipeline::GetPipelineHandle() const {
+		return vkPipelineHandle;
+	}
 }

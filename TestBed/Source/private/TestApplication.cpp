@@ -61,6 +61,7 @@ namespace Spock::Testbed
         try {
             while (!glfwWindowShouldClose(window.get())) {
                 glfwPollEvents();
+                renderer->RenderFrame();
             }
         } catch (SpockException e) {
             LOG_ERROR(e);

@@ -11,6 +11,9 @@ namespace Spock::vkCore
 	public:
 		Pipeline(std::shared_ptr<LogicalDevice> device, VkPipelineLayout pipelineLayout, VkPipeline pipeline);
 		~Pipeline();
+
+		const VkPipelineLayout GetLayoutHandle() const;
+		const VkPipeline GetPipelineHandle() const;
 	private:
 		VkPipelineLayout vkPipelineLayoutHandle;
 		VkPipeline vkPipelineHandle;
