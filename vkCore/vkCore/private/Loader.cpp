@@ -108,15 +108,15 @@ namespace Spock::vkCore
 		#include "vkCore/ListOfVulkanFunctions.inl"
 	}
 
-	void LoaderImpl::LoadInstanceLevelFunctionsFromExtensions(const VkInstance instance) {
+	void LoaderImpl::LoadInstanceLevelFunctionsFromExtensions(const VkInstance instance, const std::vector<const char*>& chosenExtensions) {
 		ASSERT_USAGE((loadStateBitmask & GLOBAL_FUNCTIONS_LOADED) > 0, "Must call GLOBAL_FUNCTIONS_LOADED() before LoadInstanceLevelFunctionsFromExtensions().");
 		LOG_INFO("\nLoading INSTANCE_LEVEL_VULKAN_FUNCTIONS_FROM_EXTENSIONS...");
 		bool extensionAvailable;
 		
 		#define INSTANCE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION(name, extension)				\
 		extensionAvailable = false;															\
-		for (auto& availableExtension : availableExtensions) {								\
-			if (std::string(availableExtension.extensionName) == std::string(extension)) {	\
+		for (auto& chosenExtension : chosenExtensions) {								\
+			if (std::string(chosenExtension) == std::string(extension)) {	\
 				extensionAvailable = true;													\
 				name = (PFN_##name)vkGetInstanceProcAddr(instance, #name);					\
 				if (name == nullptr) {														\

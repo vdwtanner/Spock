@@ -25,9 +25,13 @@ namespace Spock::Testbed
 	}
 
 	GlfwRenderer::~GlfwRenderer() {
-		vkDestroyCommandPool(device->GetVkDeviceHandle(), commandPool, nullptr);
+		auto deviceHandle = device->GetVkDeviceHandle();
+		vkDeviceWaitIdle(deviceHandle);
+		vkDestroySemaphore(deviceHandle, imageAvailableSemaphore, nullptr);
+		vkDestroySemaphore(deviceHandle, renderFinishedSemaphore, nullptr);
+		vkDestroyCommandPool(deviceHandle, commandPool, nullptr);
 		for (auto frameBuffer : frameBuffers) {
-			vkDestroyFramebuffer(device->GetVkDeviceHandle(), frameBuffer, nullptr);
+			vkDestroyFramebuffer(deviceHandle, frameBuffer, nullptr);
 		}
 	}
 
@@ -43,10 +47,15 @@ namespace Spock::Testbed
 		CreateCommandPool();
 		CreateCommandBuffers();
 		RecordCommands();
+		CreateSemaphores();
 	}
 
 	void GlfwRenderer::RenderFrame() {
+		auto imageIndex = AquireImage();
+		SubmitDrawCommandBuffer(imageIndex);
+		Present(imageIndex);
 
+		vkQueueWaitIdle(device->GetPresentQueue());
 	}
 
 	void GlfwRenderer::CreateSurface() {
@@ -84,8 +93,17 @@ namespace Spock::Testbed
 
 		subpassBuilder.AddColorAttachment(colorAttachmentRef);
 
+		VkSubpassDependency dependency{};
+		dependency.srcSubpass = VK_SUBPASS_EXTERNAL;
+		dependency.dstSubpass = 0;
+		dependency.srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+		dependency.srcAccessMask = 0;
+		dependency.dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+		dependency.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+
 		renderPassBuilder.AddColorAttachmentDefault(swapChain->GetFormat());
 		renderPassBuilder.AddSubpass(subpassBuilder.Build());
+		renderPassBuilder.AddSubpassDependency(dependency);
 
 		renderPass = renderPassBuilder.Build(device);
 	}
@@ -183,5 +201,54 @@ namespace Spock::Testbed
 
 			VK_CALL(vkEndCommandBuffer(commandBuffers[i]), "Failure occurred while ending command buffer recording");
 		}
+	}
+	
+	void GlfwRenderer::CreateSemaphores() {
+		VkSemaphoreCreateInfo semaphoreCreateInfo{};
+		semaphoreCreateInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
+		auto deviceHandle = device->GetVkDeviceHandle();
+		VK_CALL(vkCreateSemaphore(deviceHandle, &semaphoreCreateInfo, nullptr, &imageAvailableSemaphore), "Failed to create image semaphore");
+		VK_CALL(vkCreateSemaphore(deviceHandle, &semaphoreCreateInfo, nullptr, &renderFinishedSemaphore), "Failed to create render semaphore");
+	}
+	uint32_t GlfwRenderer::AquireImage() {
+		uint32_t imageIndex;
+		auto deviceHandle = device->GetVkDeviceHandle();
+		VK_CALL(vkAcquireNextImageKHR(deviceHandle, swapChain->GetSwapChainHandle(), UINT64_MAX, imageAvailableSemaphore, VK_NULL_HANDLE, &imageIndex),
+			"Failed to aquire the next imageIndex");
+
+		return imageIndex;
+	}
+
+	void GlfwRenderer::SubmitDrawCommandBuffer(uint32_t imageIndex) {
+		VkSubmitInfo submitInfo{};
+		submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+		VkSemaphore waitSemaphores[] = { imageAvailableSemaphore };
+		VkPipelineStageFlags waitStages[] = { VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT };
+		submitInfo.waitSemaphoreCount = 1;
+		submitInfo.pWaitSemaphores = waitSemaphores;
+		submitInfo.pWaitDstStageMask = waitStages;
+		submitInfo.commandBufferCount = 1;
+		submitInfo.pCommandBuffers = &commandBuffers[imageIndex];
+		VkSemaphore signalSemaphores[] = { renderFinishedSemaphore };
+		submitInfo.signalSemaphoreCount = 1;
+		submitInfo.pSignalSemaphores = signalSemaphores;
+		auto graphicsQueue = device->GetQueueFamilyIndices().graphicsFamily.Get();
+
+		VK_CALL(vkQueueSubmit(device->GetGraphicsQueue(), 1, &submitInfo, VK_NULL_HANDLE), "Failed to submit draw command buffer");
+	}
+	
+	void GlfwRenderer::Present(uint32_t imageIndex) {
+		VkSemaphore waitSemaphores[] = { renderFinishedSemaphore };
+		VkSwapchainKHR swapChains[] = { swapChain->GetSwapChainHandle() };
+		VkPresentInfoKHR presentInfo{};
+		presentInfo.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
+		presentInfo.waitSemaphoreCount = 1;
+		presentInfo.pWaitSemaphores = waitSemaphores;
+		presentInfo.swapchainCount = 1;
+		presentInfo.pSwapchains = swapChains;
+		presentInfo.pImageIndices = &imageIndex;
+
+		VK_CALL(vkQueuePresentKHR(device->GetPresentQueue(), &presentInfo), "Failed to submit present request");
+
 	}
 }

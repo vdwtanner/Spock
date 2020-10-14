@@ -34,7 +34,7 @@ namespace Spock::vkCore
 		virtual void LoadGlobalFunctions() = 0;
 		virtual void DiscoverAvailableExtensions() = 0;
 		virtual void LoadInstanceLevelFunctions(const VkInstance instance) = 0;
-		virtual void LoadInstanceLevelFunctionsFromExtensions(const VkInstance instance) = 0;
+		virtual void LoadInstanceLevelFunctionsFromExtensions(const VkInstance instance, const std::vector<const char*>& chosenExtension) = 0;
 		virtual void LoadDeviceLevelFunctions(const LogicalDevice* device) = 0;
 		virtual void LoadDeviceLevelFunctionsFromExtensions(const LogicalDevice* device) = 0;
 		virtual bool AreAllExtensionsAvailable(const std::vector<const char*>& desiredExtensions) const = 0;
@@ -50,7 +50,7 @@ namespace Spock::vkCore
 		void LoadGlobalFunctions() override;
 		void DiscoverAvailableExtensions() override;
 		void LoadInstanceLevelFunctions(const VkInstance instance) override;
-		void LoadInstanceLevelFunctionsFromExtensions(const VkInstance instance) override;
+		void LoadInstanceLevelFunctionsFromExtensions(const VkInstance instance, const std::vector<const char*>& chosenExtension) override;
 		void LoadDeviceLevelFunctions(const LogicalDevice* device) override;
 		void LoadDeviceLevelFunctionsFromExtensions(const LogicalDevice* device) override;
 		bool AreAllExtensionsAvailable(const std::vector<const char*>& desiredExtensions) const override;

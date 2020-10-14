@@ -16,6 +16,7 @@ namespace Spock::vkCore
 		const VkExtent2D GetExtent() const;
 		const int GetNumImageViews() const;
 		const VkImageView& GetImageView(int x) const;
+		const VkSwapchainKHR GetSwapChainHandle() const;
 		~SwapChain();
 	private:
 		const VkSwapchainKHR vkSwapChainHandle;

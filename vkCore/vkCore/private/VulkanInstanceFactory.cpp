@@ -29,7 +29,7 @@ namespace Spock::vkCore
 		VkInstanceCreateInfo createInfo = MakeVkInstanceCreateInfo(&appInfo, layers, extensions);
 		VkInstance vkInstance = MakeVkInstance(&createInfo);
 		loader->LoadInstanceLevelFunctions(vkInstance);
-		loader->LoadInstanceLevelFunctionsFromExtensions(vkInstance);
+		loader->LoadInstanceLevelFunctionsFromExtensions(vkInstance, extensions);
 		auto vkDebugMessengerHandle = MakeVkDebugUtilsMessenger(vkInstance);
 		auto instance = std::make_unique<VulkanInstance>(vkInstance, vkDebugMessengerHandle);
 		

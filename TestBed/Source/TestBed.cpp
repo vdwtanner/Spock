@@ -5,16 +5,22 @@
 
 #include "TestApplication.h"
 
+#include <iostream>
+
 #include "Common/Exceptions/FileNotFoundException.h"
 #include "Common/Logger/Logger.h"
 
 using namespace Spock::Testbed;
 using namespace Spock::Common;
 
-int main()
-{
+void execute() {
     TestApplication app;
     app.Init();
     app.Run();
-   
+}
+
+int main()
+{
+    execute();
+    PAUSE();
 }

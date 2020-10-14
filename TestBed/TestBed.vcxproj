@@ -108,6 +108,14 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>call "$(ProjectDir)BuildScripts\compileAllShaders.bat" "$(ProjectDir)Resources\Shaders"
+xcopy "$(ProjectDir)Resources\Shaders\Compiled" "$(TargetDir)Resources\Shaders\Compiled"  /Y /E /I </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -125,6 +133,14 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>call "$(ProjectDir)BuildScripts\compileAllShaders.bat" "$(ProjectDir)Resources\Shaders"
+xcopy "$(ProjectDir)Resources\Shaders\Compiled" "$(TargetDir)Resources\Shaders\Compiled"  /Y /E /I </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -138,6 +154,14 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>call "$(ProjectDir)BuildScripts\compileAllShaders.bat" "$(ProjectDir)Resources\Shaders"
+xcopy "$(ProjectDir)Resources\Shaders\Compiled" "$(TargetDir)Resources\Shaders\Compiled"  /Y /E /I </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -155,6 +179,14 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>call "$(ProjectDir)BuildScripts\compileAllShaders.bat" "$(ProjectDir)Resources\Shaders"
+xcopy "$(ProjectDir)Resources\Shaders\Compiled" "$(TargetDir)Resources\Shaders\Compiled"  /Y /E /I </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\GlfwRenderer.cpp" />

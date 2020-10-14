@@ -41,7 +41,10 @@ namespace Spock::Testbed
 		std::vector<VkFramebuffer> frameBuffers;
 		VkCommandPool commandPool;
 		std::vector<VkCommandBuffer> commandBuffers;
+		VkSemaphore imageAvailableSemaphore;
+		VkSemaphore renderFinishedSemaphore;
 
+		//Init
 		void CreateSurface();
 		void CreateDevice();
 		void CreateSwapChain();
@@ -51,6 +54,12 @@ namespace Spock::Testbed
 		void CreateCommandPool();
 		void CreateCommandBuffers();
 		void RecordCommands();
+		void CreateSemaphores();
+
+		//RenderFrame
+		uint32_t AquireImage();
+		void SubmitDrawCommandBuffer(uint32_t imageIndex);
+		void Present(uint32_t imageIndex);
 	};
 }
 

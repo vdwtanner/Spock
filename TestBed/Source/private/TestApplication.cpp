@@ -30,8 +30,7 @@ namespace Spock::Testbed
             InitWindow();
             InitRenderer();
         } catch (SpockException& e) {
-            LOG_ERROR(e);
-            exit(1);
+            ABORT(e);
         }
         
     }

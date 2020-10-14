@@ -31,6 +31,8 @@ namespace Spock::vkCore
 		const VkDevice GetVkDeviceHandle() const;
 		const PhysicalDevice GetPhysicalDevice() const;
 		const QueueFamilyIndices GetQueueFamilyIndices() const;
+		const VkQueue GetGraphicsQueue() const;
+		const VkQueue GetPresentQueue() const;
 		const bool IsExtensionSupported(const char* extensionName) const;
 	private:
 		const VkDevice vkDeviceHandle;

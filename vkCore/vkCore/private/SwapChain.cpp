@@ -32,6 +32,10 @@ namespace Spock::vkCore
 		return imageViews[x];
 	}
 
+	const VkSwapchainKHR SwapChain::GetSwapChainHandle() const {
+		return vkSwapChainHandle;
+	}
+
 	SwapChain::~SwapChain() {
 		for (auto& imageView : imageViews) {
 			vkDestroyImageView(logicalDevice->GetVkDeviceHandle(), imageView, nullptr);

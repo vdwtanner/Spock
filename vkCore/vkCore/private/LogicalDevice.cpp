@@ -41,6 +41,14 @@ namespace Spock::vkCore
 		return queueFamilyIndices;
 	}
 
+	const VkQueue LogicalDevice::GetGraphicsQueue() const {
+		return graphicsQueue;
+	}
+
+	const VkQueue LogicalDevice::GetPresentQueue() const {
+		return presentQueue;
+	}
+
 	const bool LogicalDevice::IsExtensionSupported(const char* extensionName) const {
 		for (auto extension : availableExtensions) {
 			if (strcmp(extension, extensionName) != 0) {
